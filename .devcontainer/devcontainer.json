@@ -1,0 +1,38 @@
+{
+  "name": "dev-config-js - Node (18-26)",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/dev-code-js",
+  "remoteUser": "vscode",
+  "initializeCommand": "bash .devcontainer/initializeCommand.sh",
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  },
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "/var/run/ssh-agent.sock"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "extensions.ignoreRecommendations": true,
+        "remote.autoForwardPorts": false
+      },
+      "extensions": [
+        "DavidAnson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format",
+        "JannisX11.batch-rename-extension",
+        "mhutchie.git-graph",
+        "mikestead.dotenv",
+        "oderwat.indent-rainbow",
+        "redhat.vscode-yaml",
+        "timonwong.shellcheck",
+        "YoavBls.pretty-ts-errors",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  }
+}

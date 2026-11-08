@@ -1,0 +1,43 @@
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
+
+# Define build arguments (can be overridden via devcontainer.json)
+ARG NVM_VERSION=v0.39.7
+ARG DEFAULT_NODE_VERSION=24
+ARG NODE_VERSIONS="18 20 22 24 26"
+
+# Define user and home directory variables for the build process
+ARG USERNAME=vscode
+ARG USER_HOME=/home/${USERNAME}
+
+# Switch to the non-root user for NVM and Node installations
+USER ${USERNAME}
+
+# Install NVM dynamically and loop through the node versions
+ENV NVM_DIR="${USER_HOME}/.nvm"
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash \
+  && . "$NVM_DIR/nvm.sh" \
+  && for v in ${NODE_VERSIONS}; do nvm install "$v"; done \
+  && nvm alias default ${DEFAULT_NODE_VERSION}
+
+# Automatically source NVM in the user's bash shell
+RUN echo "export NVM_DIR=\"${USER_HOME}/.nvm\"" >> ${USER_HOME}/.bashrc \
+  && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ${USER_HOME}/.bashrc \
+  && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ${USER_HOME}/.bashrc
+
+# Install pnpm globally and enable tab completion
+RUN . "${USER_HOME}/.nvm/nvm.sh" \
+  && nvm use default \
+  && npm install -g pnpm \
+  && pnpm setup
+
+# Ensure global git config for SSH signing is permanently set
+RUN git config --global gpg.format ssh \
+  && git config --global user.signingkey "/home/vscode/.ssh/id_ed25519-git-commit.pub" \
+  && git config --global gpg.ssh.allowedSignersFile "/home/vscode/.ssh/allowed_signers" \
+  && git config --global commit.gpgsign true
+
+# Add useful shell aliases and ensure they expand properly
+RUN echo 'alias l="ls -lh"' >> ${USER_HOME}/.bashrc \
+  && echo 'alias ll="l -a"' >> ${USER_HOME}/.bashrc \
+  && echo 'alias ..="cd .."' >> ${USER_HOME}/.bashrc \
+  && echo 'shopt -s expand_aliases' >> ${USER_HOME}/.bashrc

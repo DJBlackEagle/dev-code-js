@@ -1,0 +1,29 @@
+name: dev-code-js
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        USERNAME: "vscode"
+        NVM_VERSION: "v0.39.7"
+        DEFAULT_NODE_VERSION: "24"
+        NODE_VERSIONS: "18 20 22 24 26"
+    command: sleep infinity
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspaces/dev-code-js
+        consistency: cached
+      - type: bind
+        source: ${SSH_AUTH_SOCK}
+        target: /var/run/ssh-agent.sock
+      - type: bind
+        source: ${HOME}/.ssh
+        target: /home/vscode/.ssh
+        read_only: true
+      - type: bind
+        source: ${AI_CONFIG_HOST}
+        target: ${AI_CONFIG_TARGET}
+        consistency: cached
