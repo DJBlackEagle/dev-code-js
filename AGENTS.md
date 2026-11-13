@@ -52,11 +52,16 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 ├── .prettierrc.json                 # Prettier Rules
 ├── .prettierignore                  # Prettier Exclusions
 ├── AGENTS.md                        # AI Agent Guidelines & Engineering Standards
+├── CODE_OF_CONDUCT.md               # Contributor Covenant Code of Conduct
+├── CODEOWNERS                       # Repository Code Owners
 ├── commitlint.config.js             # Conventional Commits Configuration
-├── eslint.config.js                 # ESLint 9 Flat Config (Strict Type-Checked)
+├── CONTRIBUTING.md                  # Contribution & Commit Message Guidelines
+├── eslint.config.js                 # ESLint Flat Config (Strict Type-Checked)
+├── LICENSE.md                       # MIT License
 ├── package.json                     # Scripts, Exports & Dependencies
 ├── pnpm-workspace.yaml              # pnpm Supply-Chain & Build Policies
 ├── README.md                        # Project Documentation & Quickstart
+├── SECURITY.md                      # Security & Vulnerability Disclosure Policy
 ├── tsconfig.json                    # Base TypeScript Config (Workspace/Editor)
 ├── tsconfig.build.json              # Production Build (excludes *.spec.ts)
 ├── tsconfig.eslint.json             # Linting Config (Type-checked across repo)

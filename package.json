@@ -2,6 +2,16 @@
   "name": "@djblackeagle/dev-config-js",
   "version": "0.0.0",
   "description": "Centralized, modular TypeScript, ESLint, Prettier, Markdownlint, Vitest, and Git tooling configuration.",
+  "license": "MIT",
+  "author": "DJ BlackEagle",
+  "homepage": "https://github.com/DJBlackEagle/dev-code-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DJBlackEagle/dev-code-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DJBlackEagle/dev-code-js/issues"
+  },
   "keywords": [
     "config",
     "typescript",
