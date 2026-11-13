@@ -1,0 +1,24 @@
+name: 📖 Documentation Improvement
+description: Report missing, outdated, or unclear documentation.
+title: 'docs: '
+labels: ['documentation', 'needs-triage']
+assignees:
+  - DJBlackEagle
+
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Affected Documentation File or Section
+      description: Where is the documentation issue located (e.g., `README.md`, `AGENTS.md`, `CONTRIBUTING.md`)?
+      placeholder: e.g. README.md - Getting Started section
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: Describe what is unclear, outdated, or missing and how it could be improved.
+    validations:
+      required: true

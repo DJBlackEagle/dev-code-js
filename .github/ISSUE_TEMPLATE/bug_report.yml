@@ -1,0 +1,77 @@
+name: 🐛 Bug Report
+description: Report a bug, misconfiguration, or unexpected behavior in a preset.
+title: 'fix: '
+labels: ['bug', 'needs-triage']
+assignees:
+  - DJBlackEagle
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Before submitting, please make sure you are using the latest version of `@djblackeagle/dev-config-js`.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Affected Module / Preset
+      description: Which configuration module is affected by this issue?
+      options:
+        - tsconfig
+        - eslint
+        - prettier
+        - vitest
+        - markdownlint
+        - commitlint
+        - lint-staged
+        - devcontainer
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what is happening...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Minimal steps or configuration snippet to reproduce the behavior.
+      placeholder: |
+        1. Configure `eslint.config.js` with `presets.library`
+        2. Run `pnpm lint`
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      description: What version of `@djblackeagle/dev-config-js` are you using?
+      placeholder: e.g. 1.0.0
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment (Node.js, pnpm, OS)
+      description: What runtime and package manager versions are you using?
+      placeholder: e.g. Node.js 24.x, pnpm 12.x, Ubuntu 24.04
+    validations:
+      required: false
