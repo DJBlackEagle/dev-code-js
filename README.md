@@ -40,6 +40,56 @@ in your project.
 pnpm add -D @djblackeagle/dev-config-js
 ```
 
+### TypeScript (`tsconfig`) Presets
+
+Extend one of the modular TypeScript presets in your project's `tsconfig.json`:
+
+- **Shared Library (`@djblackeagle/dev-config-js/tsconfig/library.json`):**
+
+  ```json
+  {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@djblackeagle/dev-config-js/tsconfig/library.json",
+    "compilerOptions": {
+      "outDir": "./dist",
+      "rootDir": "./src"
+    },
+    "include": ["src/**/*"]
+  }
+  ```
+
+- **NestJS Backend (`@djblackeagle/dev-config-js/tsconfig/nestjs.json`):**
+
+  ```json
+  {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@djblackeagle/dev-config-js/tsconfig/nestjs.json",
+    "compilerOptions": {
+      "outDir": "./dist",
+      "baseUrl": "./"
+    },
+    "include": ["src/**/*"]
+  }
+  ```
+
+- **Angular Frontend (`@djblackeagle/dev-config-js/tsconfig/angular.json`):**
+
+  ```json
+  {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@djblackeagle/dev-config-js/tsconfig/angular.json"
+  }
+  ```
+
+- **Base Configuration (`@djblackeagle/dev-config-js/tsconfig/base.json`):**
+
+  ```json
+  {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@djblackeagle/dev-config-js/tsconfig/base.json"
+  }
+  ```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to

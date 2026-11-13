@@ -36,9 +36,21 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 
 ```text
 ├── src/
+│   ├── tsconfig/
+│   │   ├── angular.json             # Angular TypeScript Preset
+│   │   ├── base.json                # Strict Base TypeScript Preset
+│   │   ├── library.json             # Shared Library TypeScript Preset
+│   │   ├── nestjs.json              # NestJS TypeScript Preset
+│   │   └── tsconfig.spec.ts         # Co-located Unit Spec for TS Presets
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
+├── .github/
+│   ├── ISSUE_TEMPLATE/              # Structured GitHub Issue Forms
+│   ├── workflows/                   # GitHub Actions CI & Automation Workflows
+│   ├── dependabot.yml               # Automated Dependency Updates
+│   ├── labels.yml                   # Repository Label Definitions
+│   └── PULL_REQUEST_TEMPLATE.md     # Pull Request Checklist Template
 ├── .husky/
 │   ├── commit-msg                   # Commitlint Git Hook
 │   └── pre-commit                   # Lint-Staged Git Hook
@@ -84,7 +96,7 @@ Always execute commands via `pnpm`:
 - **Check formatting:** `pnpm format` (`prettier --check .`)
 - **Apply formatting:** `pnpm format:fix` (`prettier --write .`)
 - **Clean workspace:** `pnpm clean` (executes `clean:build`, `clean:node`, `clean:coverage`)
-- **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json`)
+- **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json && pnpm run build:assets`)
 
 ### Verification Strategy by Change Scope
 
