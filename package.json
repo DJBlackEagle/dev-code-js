@@ -53,6 +53,9 @@
     "test:watch": "vitest"
   },
   "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
