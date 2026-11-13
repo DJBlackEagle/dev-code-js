@@ -1,0 +1,55 @@
+name: 🚀 Feature / Preset Request
+description: Suggest a new configuration preset, rule adjustment, or enhancement.
+title: 'feat: '
+labels: ['feature', 'needs-triage']
+assignees:
+  - DJBlackEagle
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an enhancement for `@djblackeagle/dev-config-js`!
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Target Module / Preset
+      description: Which configuration module does this request relate to?
+      options:
+        - tsconfig
+        - eslint
+        - prettier
+        - vitest
+        - markdownlint
+        - commitlint
+        - lint-staged
+        - devcontainer
+        - new-module / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Motivation / Problem Statement
+      description: Is your feature request related to a problem or friction point? Please describe.
+      placeholder: I am always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: A clear and concise description of what you want to happen or which rules/options should be added.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions or workarounds?
+    validations:
+      required: false
