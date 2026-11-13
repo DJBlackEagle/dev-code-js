@@ -2,15 +2,13 @@
 
 ## What is the purpose of this pull request? (put an "x" next to an item)
 
-```text
-[ ] Bugfix
-[ ] Feature
-[ ] Documentation
-[ ] Code style update (formatting, local variables)
-[ ] Refactoring (no functional changes, no api changes)
-[ ] Repository Management related changes
-[ ] Other, please explain:
-```
+- [ ] Bugfix
+- [ ] Feature
+- [ ] Documentation
+- [ ] Code style update (formatting, local variables)
+- [ ] Refactoring (no functional changes, no api changes)
+- [ ] Repository Management related changes
+- [ ] Other, please explain:
 
 <!--
     Please ensure your pull request is ready:
@@ -35,7 +33,5 @@
 
 <!-- Please check the one that applies to this PR using "x". -->
 
-```text
-[ ] Yes
-[ ] No
-```
+- [ ] Yes
+- [ ] No
