@@ -11,7 +11,7 @@ updates:
       timezone: 'Europe/Berlin'
       interval: 'monthly'
     assignees:
-      - 'DJ BlackEagle'
+      - 'DJBlackEagle'
     commit-message:
       prefix: 'chore(github)'
     open-pull-requests-limit: 5
