@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: dockerfile
       args:
-        USERNAME: "vscode"
-        NVM_VERSION: "v0.39.7"
-        DEFAULT_NODE_VERSION: "24"
-        NODE_VERSIONS: "18 20 22 24 26"
+        USERNAME: 'vscode'
+        NVM_VERSION: 'v0.39.7'
+        DEFAULT_NODE_VERSION: '24'
+        NODE_VERSIONS: '18 20 22 24 26'
     command: sleep infinity
     volumes:
       - type: bind

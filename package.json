@@ -1,0 +1,85 @@
+{
+  "name": "@djblackeagle/dev-config-js",
+  "version": "0.0.0",
+  "description": "Centralized, modular TypeScript, ESLint, Prettier, Markdownlint, Vitest, and Git tooling configuration.",
+  "license": "MIT",
+  "author": "DJ BlackEagle",
+  "homepage": "https://github.com/DJBlackEagle/dev-code-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DJBlackEagle/dev-code-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DJBlackEagle/dev-code-js/issues"
+  },
+  "keywords": [
+    "config",
+    "typescript",
+    "eslint",
+    "prettier",
+    "vitest"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "clean": "pnpm run clean:build && pnpm run clean:node && pnpm run clean:coverage",
+    "clean:build": "rm -rf dist *.tsbuildinfo",
+    "clean:node": "rm -rf node_modules",
+    "clean:coverage": "rm -rf coverage",
+    "prepublishOnly": "pnpm run clean:build && pnpm run build",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && markdownlint-cli2",
+    "lint:fix": "eslint . --fix && markdownlint-cli2 --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "test": "vitest run --coverage.enabled --coverage.reporter=text",
+    "test:unit": "vitest run src --coverage.enabled --coverage.reporter=text",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.15.0",
+      "onFail": "download"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "@vitest/coverage-v8": "^5.1.0",
+    "@vitest/ui": "^5.1.0",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "markdownlint-cli2": "^0.24.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.1.0"
+  }
+}
