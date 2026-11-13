@@ -5,6 +5,20 @@
 
 version: 2
 updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      timezone: 'Europe/Berlin'
+      interval: 'weekly'
+    assignees:
+      - 'DJBlackEagle'
+    commit-message:
+      prefix: 'chore(deps)'
+    open-pull-requests-limit: 10
+    labels:
+      - 'dependabot'
+      - 'dependencies'
+
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
@@ -13,7 +27,7 @@ updates:
     assignees:
       - 'DJBlackEagle'
     commit-message:
-      prefix: 'chore(github)'
+      prefix: 'ci(deps)'
     open-pull-requests-limit: 5
     labels:
       - 'dependabot'
