@@ -1,0 +1,89 @@
+name: 'Code quality and tests'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cqat_validate_commits:
+    name: Validate commit messages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+      - name: Install dependencies 🔧
+        run: pnpm install --frozen-lockfile
+      - name: Validate pull request commits 📝
+        run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+
+  cqat_check_sourcecode:
+    name: Check source code & build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+      - name: Install dependencies 🔧
+        run: pnpm install --frozen-lockfile
+      - name: Run Prettier 📃
+        run: pnpm run format
+      - name: Run ESLint & Markdownlint 📝
+        run: pnpm run lint
+      - name: Run TypeScript Typecheck 🔍
+        run: pnpm run typecheck
+      - name: Run Production Build 🏗️
+        run: pnpm run build
+
+  cqat_test_units:
+    name: Unit tests (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies 🔧
+        run: pnpm install --frozen-lockfile
+      - name: Run Vitest 🧪
+        run: pnpm run test
