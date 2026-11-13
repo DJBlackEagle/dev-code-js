@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/@djblackeagle/dev-config-js.svg)][REF_INTERN_URL_NPMJS_PACKAGE]
 [![Downloads](https://img.shields.io/npm/dm/@djblackeagle/dev-config-js.svg)][REF_INTERN_URL_NPMJS_PACKAGE]
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)][REF_INTERN_FILE_MD_LICENSE]
+[![CodeQL](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CODEQL]
+[![Build Status](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CQAT]
 [![Code Style](https://img.shields.io/badge/code_style-@djblackeagle--dev--config--js-blue.svg)][REF_INTERN_FILE_MD_README]
 
 Centralized, modular TypeScript, ESLint (Flat Config), Prettier, Markdownlint, Vitest, and Git tooling configuration
@@ -71,3 +73,5 @@ This project is licensed under the [MIT License][REF_INTERN_FILE_MD_LICENSE].
 [REF_INTERN_FILE_MD_README]: ./README.md
 [REF_INTERN_FILE_MD_SECURITY]: ./SECURITY.md
 [REF_INTERN_URL_NPMJS_PACKAGE]: https://www.npmjs.com/package/@djblackeagle/dev-config-js
+[REF_INTERN_URL_WORKFLOW_CODEQL]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml
+[REF_INTERN_URL_WORKFLOW_CQAT]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml
