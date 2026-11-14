@@ -170,6 +170,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      prettier:
+        specifier: ^3.9.10
+        version: 3.9.10
     devDependencies:
       '@commitlint/cli':
         specifier: ^21.2.4
@@ -204,9 +208,6 @@ importers:
       markdownlint-cli2:
         specifier: ^0.24.0
         version: 0.24.0(supports-color@7.2.0)
-      prettier:
-        specifier: ^3.9.10
-        version: 3.9.10
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
