@@ -160,6 +160,31 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   ];
   ```
 
+### Markdownlint Preset
+
+Run `markdownlint-cli2` with the shared configuration preset (`@djblackeagle/dev-config-js/markdownlint`):
+
+```bash
+pnpm exec markdownlint-cli2 --config node_modules/@djblackeagle/dev-config-js/dist/markdownlint/index.jsonc
+```
+
+Or extend/copy the preset in your project's `.markdownlint-cli2.jsonc`:
+
+```jsonc
+{
+  "config": {
+    "default": true,
+    "MD013": {
+      "line_length": 120,
+      "tables": false,
+      "code_blocks": false,
+    },
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "**/.tmp/**"],
+}
+```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to

@@ -189,6 +189,9 @@ importers:
       globals:
         specifier: ^17.14.0
         version: 17.14.0
+      markdownlint-cli2:
+        specifier: ^0.24.0
+        version: 0.24.0(supports-color@7.2.0)
       prettier:
         specifier: ^3.9.10
         version: 3.9.10
@@ -220,9 +223,6 @@ importers:
       lint-staged:
         specifier: ^17.6.0
         version: 17.6.0
-      markdownlint-cli2:
-        specifier: ^0.24.0
-        version: 0.24.0(supports-color@7.2.0)
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
