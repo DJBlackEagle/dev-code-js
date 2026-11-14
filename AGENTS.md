@@ -36,15 +36,31 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 
 ```text
 ├── src/
+│   ├── eslint/
+│   │   ├── angular.ts               # Angular ESLint Flat Config Building Block
+│   │   ├── angular.spec.ts          # Co-located Unit Spec
+│   │   ├── base.ts                  # Strict Base JS/TS + JSDoc ESLint Config
+│   │   ├── base.spec.ts             # Co-located Unit Spec
+│   │   ├── index.ts                 # Central ESLint Exports & Stack Presets
+│   │   ├── index.spec.ts            # Co-located Unit Spec
+│   │   ├── nestjs.ts                # NestJS ESLint Flat Config Building Block
+│   │   ├── nestjs.spec.ts           # Co-located Unit Spec
+│   │   ├── prettier.ts              # Prettier Rule Conflict Disabler
+│   │   ├── prettier.spec.ts         # Co-located Unit Spec
+│   │   ├── vitest.ts                # Vitest Spec/Test ESLint Building Block
+│   │   └── vitest.spec.ts           # Co-located Unit Spec
 │   ├── prettier/
 │   │   ├── index.ts                 # Shared Prettier Configuration Preset
 │   │   └── index.spec.ts            # Co-located Unit Spec for Prettier Preset
 │   ├── tsconfig/
 │   │   ├── angular.json             # Angular TypeScript Preset
+│   │   ├── angular.spec.ts          # Co-located Unit Spec
 │   │   ├── base.json                # Strict Base TypeScript Preset
+│   │   ├── base.spec.ts             # Co-located Unit Spec
 │   │   ├── library.json             # Shared Library TypeScript Preset
+│   │   ├── library.spec.ts          # Co-located Unit Spec
 │   │   ├── nestjs.json              # NestJS TypeScript Preset
-│   │   └── tsconfig.spec.ts         # Co-located Unit Spec for TS Presets
+│   │   └── nestjs.spec.ts           # Co-located Unit Spec
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
