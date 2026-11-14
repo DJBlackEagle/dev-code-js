@@ -45,7 +45,17 @@
       "default": "./dist/prettier/index.js"
     },
     "./tsconfig/*": "./dist/tsconfig/*",
-    "./tsconfig/*.json": "./dist/tsconfig/*.json"
+    "./tsconfig/*.json": "./dist/tsconfig/*.json",
+    "./vitest": {
+      "types": "./dist/vitest/index.d.ts",
+      "import": "./dist/vitest/index.js",
+      "default": "./dist/vitest/index.js"
+    },
+    "./vitest/*": {
+      "types": "./dist/vitest/*.d.ts",
+      "import": "./dist/vitest/*.js",
+      "default": "./dist/vitest/*.js"
+    }
   },
   "files": [
     "dist"
@@ -85,6 +95,7 @@
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^5.1.0",
     "@vitest/eslint-plugin": "^1.6.28",
     "angular-eslint": "^22.6.0",
     "eslint-config-prettier": "^10.1.8",
@@ -92,19 +103,18 @@
     "globals": "^17.14.0",
     "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
-    "typescript-eslint": "^8.72.2"
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@types/node": "^26.6.6",
-    "@vitest/coverage-v8": "^5.1.0",
     "@vitest/ui": "^5.1.0",
     "eslint": "^10.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "tsx": "^4.23.15",
-    "typescript": "^6.0.3",
-    "vitest": "^5.1.0"
+    "typescript": "^6.0.3"
   }
 }
