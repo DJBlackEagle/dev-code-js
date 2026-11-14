@@ -36,6 +36,19 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 
 ```text
 ├── src/
+│   ├── eslint/
+│   │   ├── angular.ts               # Angular ESLint Flat Config Building Block
+│   │   ├── angular.spec.ts          # Co-located Unit Spec
+│   │   ├── base.ts                  # Strict Base JS/TS + JSDoc ESLint Config
+│   │   ├── base.spec.ts             # Co-located Unit Spec
+│   │   ├── index.ts                 # Central ESLint Exports & Stack Presets
+│   │   ├── index.spec.ts            # Co-located Unit Spec
+│   │   ├── nestjs.ts                # NestJS ESLint Flat Config Building Block
+│   │   ├── nestjs.spec.ts           # Co-located Unit Spec
+│   │   ├── prettier.ts              # Prettier Rule Conflict Disabler
+│   │   ├── prettier.spec.ts         # Co-located Unit Spec
+│   │   ├── vitest.ts                # Vitest Spec/Test ESLint Building Block
+│   │   └── vitest.spec.ts           # Co-located Unit Spec
 │   ├── prettier/
 │   │   ├── index.ts                 # Shared Prettier Configuration Preset
 │   │   └── index.spec.ts            # Co-located Unit Spec for Prettier Preset
