@@ -5,9 +5,11 @@ import {
   PACKAGE_NAME,
   commitlintConfig,
   eslintPresets,
+  lintStagedConfig,
   prettierConfig,
   vitestPresets,
 } from './index.js';
+import { lintStagedConfig as directLintStagedConfig } from './lint-staged/index.js';
 import { prettierConfig as directPrettierConfig } from './prettier/index.js';
 import { vitestPresets as directVitestPresets } from './vitest/index.js';
 
@@ -18,6 +20,10 @@ describe('Public Root Exports (index)', () => {
 
   it('should re-export commitlintConfig from the root entrypoint', () => {
     expect(commitlintConfig).toBe(directCommitlintConfig);
+  });
+
+  it('should re-export lintStagedConfig from the root entrypoint', () => {
+    expect(lintStagedConfig).toBe(directLintStagedConfig);
   });
 
   it('should re-export prettierConfig from the root entrypoint', () => {

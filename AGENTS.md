@@ -52,6 +52,9 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   ├── prettier.spec.ts         # Co-located Unit Spec
 │   │   ├── vitest.ts                # Vitest Spec/Test ESLint Building Block
 │   │   └── vitest.spec.ts           # Co-located Unit Spec
+│   ├── lint-staged/
+│   │   ├── index.ts                 # Shared Lint-Staged Pre-Commit Preset
+│   │   └── index.spec.ts            # Co-located Unit Spec
 │   ├── markdownlint/
 │   │   ├── index.jsonc              # Shared Markdownlint-cli2 Preset
 │   │   └── index.spec.ts            # Co-located Unit Spec
