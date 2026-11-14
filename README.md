@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)][REF_INTERN_FILE_MD_LICENSE]
 [![CodeQL](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CODEQL]
 [![Build Status](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CQAT]
+[![Dependabot Updates](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/dependabot/dependabot-updates/badge.svg)][REF_INTERN_URL_WORKFLOW_DEPENDABOT]
 [![Code Style](https://img.shields.io/badge/code_style-@djblackeagle--dev--config--js-blue.svg)][REF_INTERN_FILE_MD_README]
 
 Centralized, modular TypeScript, ESLint (Flat Config), Prettier, Markdownlint, Vitest, and Git tooling configuration
@@ -15,7 +16,18 @@ for Node.js, NestJS, and Angular projects.
 - [Benefits](#benefits)
 - [Package Exports Overview](#package-exports-overview)
 - [Getting Started](#getting-started)
+  - [TypeScript (`tsconfig`) Presets](#typescript-tsconfig-presets)
+  - [Prettier Preset](#prettier-preset)
+  - [ESLint Flat Config Presets](#eslint-flat-config-presets)
+  - [Markdownlint Preset](#markdownlint-preset)
+  - [Vitest Presets](#vitest-presets)
+  - [Commitlint Preset](#commitlint-preset)
+  - [Lint-Staged Preset](#lint-staged-preset)
+  - [DevContainer Templates](#devcontainer-templates)
 - [End-to-End Stack Integration Guides](#end-to-end-stack-integration-guides)
+  - [1. Shared TypeScript Library (Node.js / Universal)](#1-shared-typescript-library-nodejs--universal)
+  - [2. NestJS Backend Service](#2-nestjs-backend-service)
+  - [3. Angular Frontend Application](#3-angular-frontend-application)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [Security](#security)
@@ -524,3 +536,4 @@ This project is licensed under the [MIT License][REF_INTERN_FILE_MD_LICENSE].
 [REF_INTERN_URL_NPMJS_PACKAGE]: https://www.npmjs.com/package/@djblackeagle/dev-config-js
 [REF_INTERN_URL_WORKFLOW_CODEQL]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml
 [REF_INTERN_URL_WORKFLOW_CQAT]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml
+[REF_INTERN_URL_WORKFLOW_DEPENDABOT]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/dependabot/dependabot-updates
