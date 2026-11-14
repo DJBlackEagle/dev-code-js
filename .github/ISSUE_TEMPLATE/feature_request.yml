@@ -24,7 +24,6 @@ body:
         - markdownlint
         - commitlint
         - lint-staged
-        - devcontainer
         - new-module / other
     validations:
       required: true
