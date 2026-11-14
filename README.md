@@ -13,7 +13,9 @@ for Node.js, NestJS, and Angular projects.
 ## Table of Contents <!-- omit in toc -->
 
 - [Benefits](#benefits)
+- [Package Exports Overview](#package-exports-overview)
 - [Getting Started](#getting-started)
+- [End-to-End Stack Integration Guides](#end-to-end-stack-integration-guides)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [Security](#security)
@@ -30,6 +32,24 @@ Using `@djblackeagle/dev-config-js` offers several advantages for your projects:
   modern ESLint Flat Config system.
 - **Modular & Composable:** Dedicated presets tailored for Shared TypeScript Libraries, NestJS Backends, and Angular
   Frontends.
+
+## Package Exports Overview
+
+| Export Path                                         | Target Tool       | Description                                                                      |
+| :-------------------------------------------------- | :---------------- | :------------------------------------------------------------------------------- |
+| `@djblackeagle/dev-config-js`                       | Central API       | Re-exports all JavaScript/TypeScript presets, factories, and types               |
+| `@djblackeagle/dev-config-js/tsconfig/base.json`    | TypeScript        | Strict ES2023 / NodeNext base compiler configuration                             |
+| `@djblackeagle/dev-config-js/tsconfig/library.json` | TypeScript        | Shared TypeScript library preset (`declaration`, `sourceMap`)                    |
+| `@djblackeagle/dev-config-js/tsconfig/nestjs.json`  | TypeScript        | NestJS backend preset (`experimentalDecorators`, `emitDecoratorMetadata`)        |
+| `@djblackeagle/dev-config-js/tsconfig/angular.json` | TypeScript        | Angular frontend preset (`bundler` resolution, `angularCompilerOptions`)         |
+| `@djblackeagle/dev-config-js/prettier`              | Prettier          | Shared Prettier configuration (`singleQuote`, `printWidth: 100`, JSONC override) |
+| `@djblackeagle/dev-config-js/eslint`                | ESLint 9+         | Stack presets (`presets.library`, `presets.nestjs`, `presets.angular`) & blocks  |
+| `@djblackeagle/dev-config-js/markdownlint`          | markdownlint-cli2 | Shared Markdownlint ruleset (`MD013` 120 chars, standard ignores)                |
+| `@djblackeagle/dev-config-js/vitest`                | Vitest            | Base Node.js / library test & V8 coverage preset (`vitestBaseConfig`)            |
+| `@djblackeagle/dev-config-js/vitest/nestjs`         | Vitest            | NestJS test & V8 coverage preset (`vitestNestjsConfig`)                          |
+| `@djblackeagle/dev-config-js/commitlint`            | Commitlint        | Conventional Commits preset (`commitlintConfig`, `createCommitlintConfig`)       |
+| `@djblackeagle/dev-config-js/lint-staged`           | lint-staged       | Pre-commit staged files preset (`lintStagedConfig`, `createLintStagedConfig`)    |
+| `@djblackeagle/dev-config-js/devcontainer/*.json`   | DevContainer      | Ready-to-use Node 24 DevContainer templates (`library`, `nestjs`, `angular`)     |
 
 ## Getting Started
 
@@ -280,6 +300,194 @@ Ready-to-use `.devcontainer/devcontainer.json` templates are included for Node.j
   ```bash
   mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/angular.json .devcontainer/devcontainer.json
   ```
+
+## End-to-End Stack Integration Guides
+
+Below are complete, copy-paste-ready setup recipes for integrating `@djblackeagle/dev-config-js` into new or existing
+projects across all three supported stacks.
+
+### 1. Shared TypeScript Library (Node.js / Universal)
+
+1. **Install dependencies:**
+
+   ```bash
+   pnpm add -D @djblackeagle/dev-config-js typescript eslint husky
+   ```
+
+2. **Configure `package.json`:**
+
+   ```json
+   {
+     "type": "module",
+     "prettier": "@djblackeagle/dev-config-js/prettier",
+     "scripts": {
+       "prepare": "husky",
+       "build": "tsc -p tsconfig.build.json",
+       "typecheck": "tsc --noEmit",
+       "lint": "eslint . && markdownlint-cli2 --config node_modules/@djblackeagle/dev-config-js/dist/markdownlint/index.jsonc",
+       "lint:fix": "eslint . --fix && markdownlint-cli2 --fix --config node_modules/@djblackeagle/dev-config-js/dist/markdownlint/index.jsonc",
+       "format": "prettier --check .",
+       "format:fix": "prettier --write .",
+       "test": "vitest run --coverage.enabled --coverage.reporter=text",
+       "test:watch": "vitest"
+     }
+   }
+   ```
+
+3. **Create `tsconfig.json`, `tsconfig.build.json`, and `tsconfig.eslint.json`:**
+
+   ```json
+   // tsconfig.json
+   {
+     "$schema": "https://json.schemastore.org/tsconfig",
+     "extends": "@djblackeagle/dev-config-js/tsconfig/library.json",
+     "compilerOptions": {
+       "outDir": "./dist",
+       "rootDir": "."
+     },
+     "include": ["src/**/*", "tests/**/*", "eslint.config.js", "vitest.config.ts"]
+   }
+   ```
+
+   ```json
+   // tsconfig.build.json
+   {
+     "$schema": "https://json.schemastore.org/tsconfig",
+     "extends": "./tsconfig.json",
+     "compilerOptions": {
+       "rootDir": "./src"
+     },
+     "include": ["src/**/*"],
+     "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts", "**/*.test.ts"]
+   }
+   ```
+
+   ```json
+   // tsconfig.eslint.json
+   {
+     "$schema": "https://json.schemastore.org/tsconfig",
+     "extends": "./tsconfig.json",
+     "compilerOptions": {
+       "noEmit": true,
+       "allowJs": true
+     },
+     "include": [
+       "src/**/*",
+       "tests/**/*",
+       ".lintstagedrc.js",
+       "commitlint.config.js",
+       "eslint.config.js",
+       "vitest.config.ts"
+     ]
+   }
+   ```
+
+4. **Create `eslint.config.js`, `vitest.config.ts`, `commitlint.config.js`, and `.lintstagedrc.js`:**
+
+   ```js
+   // eslint.config.js
+   import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+   export default [...presets.library];
+   ```
+
+   ```ts
+   // vitest.config.ts
+   import { vitestBaseConfig } from '@djblackeagle/dev-config-js/vitest';
+
+   export default vitestBaseConfig;
+   ```
+
+   ```js
+   // commitlint.config.js
+   import commitlintConfig from '@djblackeagle/dev-config-js/commitlint';
+
+   export default commitlintConfig;
+   ```
+
+   ```js
+   // .lintstagedrc.js
+   import lintStagedConfig from '@djblackeagle/dev-config-js/lint-staged';
+
+   export default lintStagedConfig;
+   ```
+
+---
+
+### 2. NestJS Backend Service
+
+1. **Install dependencies:**
+
+   ```bash
+   pnpm add -D @djblackeagle/dev-config-js typescript eslint husky
+   ```
+
+2. **Create `tsconfig.json`:**
+
+   ```json
+   {
+     "$schema": "https://json.schemastore.org/tsconfig",
+     "extends": "@djblackeagle/dev-config-js/tsconfig/nestjs.json",
+     "compilerOptions": {
+       "outDir": "./dist",
+       "baseUrl": "./"
+     },
+     "include": ["src/**/*", "test/**/*"]
+   }
+   ```
+
+3. **Create `eslint.config.js` and `vitest.config.ts`:**
+
+   ```js
+   // eslint.config.js
+   import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+   export default [...presets.nestjs];
+   ```
+
+   ```ts
+   // vitest.config.ts
+   import { vitestNestjsConfig } from '@djblackeagle/dev-config-js/vitest/nestjs';
+
+   export default vitestNestjsConfig;
+   ```
+
+---
+
+### 3. Angular Frontend Application
+
+1. **Install dependencies:**
+
+   ```bash
+   pnpm add -D @djblackeagle/dev-config-js typescript eslint husky
+   ```
+
+2. **Create `tsconfig.json`:**
+
+   ```json
+   {
+     "$schema": "https://json.schemastore.org/tsconfig",
+     "extends": "@djblackeagle/dev-config-js/tsconfig/angular.json"
+   }
+   ```
+
+3. **Create `eslint.config.js` and `.lintstagedrc.js`:**
+
+   ```js
+   // eslint.config.js
+   import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+   export default [...presets.angular];
+   ```
+
+   ```js
+   // .lintstagedrc.js
+   import { createLintStagedConfig } from '@djblackeagle/dev-config-js/lint-staged';
+
+   export default createLintStagedConfig({
+     '*.{html,scss}': ['prettier --write'],
+   });
+   ```
 
 ## Contributing
 

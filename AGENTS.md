@@ -86,6 +86,8 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   └── nestjs.spec.ts           # Co-located Unit Spec
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
+├── tests/
+│   └── package-exports.spec.ts      # End-to-End Package & Stack Verification Spec
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/              # Structured GitHub Issue Forms
