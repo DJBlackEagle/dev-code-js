@@ -185,6 +185,38 @@ Or extend/copy the preset in your project's `.markdownlint-cli2.jsonc`:
 }
 ```
 
+### Vitest Presets
+
+Use the modular Vitest presets in your project's `vitest.config.ts`:
+
+- **Shared TypeScript Library / Node.js (`@djblackeagle/dev-config-js/vitest`):**
+
+  ```ts
+  import { vitestBaseConfig } from '@djblackeagle/dev-config-js/vitest';
+
+  export default vitestBaseConfig;
+  ```
+
+- **NestJS Backend (`@djblackeagle/dev-config-js/vitest/nestjs`):**
+
+  ```ts
+  import { vitestNestjsConfig } from '@djblackeagle/dev-config-js/vitest/nestjs';
+
+  export default vitestNestjsConfig;
+  ```
+
+- **Custom Overrides (`createVitestConfig` / `createNestjsVitestConfig`):**
+
+  ```ts
+  import { createVitestConfig } from '@djblackeagle/dev-config-js/vitest';
+
+  export default createVitestConfig({
+    test: {
+      setupFiles: ['./test/setup.ts'],
+    },
+  });
+  ```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to

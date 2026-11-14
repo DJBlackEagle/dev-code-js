@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { eslintPresets as directEslintPresets } from './eslint/index.js';
-import { PACKAGE_NAME, eslintPresets, prettierConfig } from './index.js';
+import { PACKAGE_NAME, eslintPresets, prettierConfig, vitestPresets } from './index.js';
 import { prettierConfig as directPrettierConfig } from './prettier/index.js';
+import { vitestPresets as directVitestPresets } from './vitest/index.js';
 
 describe('Public Root Exports (index)', () => {
   it('should export the correct package name', () => {
@@ -14,5 +15,9 @@ describe('Public Root Exports (index)', () => {
 
   it('should re-export eslintPresets from the root entrypoint', () => {
     expect(eslintPresets).toBe(directEslintPresets);
+  });
+
+  it('should re-export vitestPresets from the root entrypoint', () => {
+    expect(vitestPresets).toBe(directVitestPresets);
   });
 });
