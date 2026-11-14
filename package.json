@@ -42,6 +42,11 @@
       "import": "./dist/eslint/*.js",
       "default": "./dist/eslint/*.js"
     },
+    "./lint-staged": {
+      "types": "./dist/lint-staged/index.d.ts",
+      "import": "./dist/lint-staged/index.js",
+      "default": "./dist/lint-staged/index.js"
+    },
     "./markdownlint": "./dist/markdownlint/index.jsonc",
     "./markdownlint/index.jsonc": "./dist/markdownlint/index.jsonc",
     "./prettier": {
@@ -108,6 +113,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^65.4.6",
     "globals": "^17.14.0",
+    "lint-staged": "^17.6.0",
     "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
     "typescript-eslint": "^8.72.2",
@@ -118,7 +124,6 @@
     "@vitest/ui": "^5.1.0",
     "eslint": "^10.14.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.6.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   }

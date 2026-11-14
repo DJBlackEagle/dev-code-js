@@ -239,6 +239,26 @@ export default createCommitlintConfig({
 });
 ```
 
+### Lint-Staged Preset
+
+Use the shared `lint-staged` pre-commit preset in your project's `.lintstagedrc.js`:
+
+```js
+import lintStagedConfig from '@djblackeagle/dev-config-js/lint-staged';
+
+export default lintStagedConfig;
+```
+
+Or extend the preset with custom file globs using `createLintStagedConfig`:
+
+```js
+import { createLintStagedConfig } from '@djblackeagle/dev-config-js/lint-staged';
+
+export default createLintStagedConfig({
+  '*.{html,scss}': ['prettier --write'],
+});
+```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to

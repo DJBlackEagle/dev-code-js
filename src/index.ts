@@ -19,6 +19,13 @@ import {
   type BaseConfigOptions,
   type EslintPresets,
 } from './eslint/index.js';
+import {
+  createLintStagedConfig,
+  lintStagedConfig,
+  type LintStagedConfigOptions,
+  type LintStagedTask,
+  type LintStagedTaskFunction,
+} from './lint-staged/index.js';
 import { prettierConfig } from './prettier/index.js';
 import {
   createNestjsVitestConfig,
@@ -40,9 +47,11 @@ export {
   createAngularConfig,
   createBaseConfig,
   createCommitlintConfig,
+  createLintStagedConfig,
   createNestjsVitestConfig,
   createVitestConfig,
   eslintPresets,
+  lintStagedConfig,
   nestjsConfig,
   prettierConfig,
   prettierEslintConfig,
@@ -57,6 +66,9 @@ export {
   type CommitlintRuleSeverity,
   type CommitlintRuleTuple,
   type EslintPresets,
+  type LintStagedConfigOptions,
+  type LintStagedTask,
+  type LintStagedTaskFunction,
   type ViteUserConfig,
   type VitestPresets,
 };
