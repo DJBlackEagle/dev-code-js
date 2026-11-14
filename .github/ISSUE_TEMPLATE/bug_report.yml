@@ -24,7 +24,6 @@ body:
         - markdownlint
         - commitlint
         - lint-staged
-        - devcontainer
         - other
     validations:
       required: true

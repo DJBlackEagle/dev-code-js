@@ -43,8 +43,6 @@ describe('End-to-End Package Verification & Stack Presets', () => {
     expect(Object.keys(pkg.exports)).toEqual([
       '.',
       './commitlint',
-      './devcontainer/*',
-      './devcontainer/*.json',
       './eslint',
       './eslint/*',
       './lint-staged',
@@ -65,9 +63,6 @@ describe('End-to-End Package Verification & Stack Presets', () => {
       'src/tsconfig/nestjs.json',
       'src/tsconfig/angular.json',
       'src/markdownlint/index.jsonc',
-      'src/devcontainer/library.json',
-      'src/devcontainer/nestjs.json',
-      'src/devcontainer/angular.json',
     ];
 
     for (const relativeAssetPath of expectedAssets) {
