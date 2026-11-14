@@ -259,6 +259,28 @@ export default createLintStagedConfig({
 });
 ```
 
+### DevContainer Templates
+
+Ready-to-use `.devcontainer/devcontainer.json` templates are included for Node.js 24 TypeScript projects:
+
+- **Shared TypeScript Library:**
+
+  ```bash
+  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/library.json .devcontainer/devcontainer.json
+  ```
+
+- **NestJS Backend (forwards ports `3000` and `9229`):**
+
+  ```bash
+  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/nestjs.json .devcontainer/devcontainer.json
+  ```
+
+- **Angular Frontend (forwards port `4200` and includes Angular Language Service):**
+
+  ```bash
+  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/angular.json .devcontainer/devcontainer.json
+  ```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to

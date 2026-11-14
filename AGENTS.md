@@ -39,6 +39,13 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   ├── commitlint/
 │   │   ├── index.ts                 # Shared Commitlint Conventional Commits Preset
 │   │   └── index.spec.ts            # Co-located Unit Spec
+│   ├── devcontainer/
+│   │   ├── angular.json             # Angular DevContainer Template
+│   │   ├── angular.spec.ts          # Co-located Unit Spec
+│   │   ├── library.json             # Shared Library DevContainer Template
+│   │   ├── library.spec.ts          # Co-located Unit Spec
+│   │   ├── nestjs.json              # NestJS DevContainer Template
+│   │   └── nestjs.spec.ts           # Co-located Unit Spec
 │   ├── eslint/
 │   │   ├── angular.ts               # Angular ESLint Flat Config Building Block
 │   │   ├── angular.spec.ts          # Co-located Unit Spec
