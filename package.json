@@ -27,6 +27,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./eslint": {
+      "types": "./dist/eslint/index.d.ts",
+      "import": "./dist/eslint/index.js",
+      "default": "./dist/eslint/index.js"
+    },
+    "./eslint/*": {
+      "types": "./dist/eslint/*.d.ts",
+      "import": "./dist/eslint/*.js",
+      "default": "./dist/eslint/*.js"
+    },
     "./prettier": {
       "types": "./dist/prettier/index.d.ts",
       "import": "./dist/prettier/index.js",
@@ -72,23 +82,27 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "prettier": "^3.9.10"
+    "@eslint/js": "^10.0.1",
+    "@vitest/eslint-plugin": "^1.6.28",
+    "angular-eslint": "^22.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^65.4.6",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "typescript-eslint": "^8.72.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
-    "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "^5.1.0",
     "@vitest/ui": "^5.1.0",
     "eslint": "^10.14.0",
-    "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "markdownlint-cli2": "^0.24.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.2",
     "vitest": "^5.1.0"
   }
 }

@@ -110,6 +110,56 @@ export default {
 };
 ```
 
+### ESLint Flat Config Presets
+
+Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`, `presets.angular`) in your project's
+`eslint.config.js`:
+
+- **Shared TypeScript Library:**
+
+  ```js
+  import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+  export default [...presets.library];
+  ```
+
+- **NestJS Backend:**
+
+  ```js
+  import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+  export default [...presets.nestjs];
+  ```
+
+- **Angular Frontend:**
+
+  ```js
+  import { presets } from '@djblackeagle/dev-config-js/eslint';
+
+  export default [...presets.angular];
+  ```
+
+- **Custom Composition (Individual Building Blocks):**
+
+  ```js
+  import {
+    createBaseConfig,
+    nestjsConfig,
+    prettierEslintConfig,
+    vitestConfig,
+  } from '@djblackeagle/dev-config-js/eslint';
+
+  export default [
+    ...createBaseConfig({
+      project: ['./tsconfig.eslint.json'],
+      tsconfigRootDir: import.meta.dirname,
+    }),
+    ...nestjsConfig,
+    ...vitestConfig,
+    ...prettierEslintConfig,
+  ];
+  ```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to
