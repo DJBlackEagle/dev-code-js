@@ -67,7 +67,7 @@
   description: 'Related to Commitlint and Lint-Staged presets.'
 - name: 'scope: devcontainer'
   color: 5319e7
-  description: 'Related to DevContainer templates.'
+  description: 'Related to the repository DevContainer setup.'
 
 # ============================================================================
 # 3. Priority

@@ -23,7 +23,6 @@ for Node.js, NestJS, and Angular projects.
   - [Vitest Presets](#vitest-presets)
   - [Commitlint Preset](#commitlint-preset)
   - [Lint-Staged Preset](#lint-staged-preset)
-  - [DevContainer Templates](#devcontainer-templates)
 - [End-to-End Stack Integration Guides](#end-to-end-stack-integration-guides)
   - [1. Shared TypeScript Library (Node.js / Universal)](#1-shared-typescript-library-nodejs--universal)
   - [2. NestJS Backend Service](#2-nestjs-backend-service)
@@ -61,7 +60,6 @@ Using `@djblackeagle/dev-config-js` offers several advantages for your projects:
 | `@djblackeagle/dev-config-js/vitest/nestjs`         | Vitest            | NestJS test & V8 coverage preset (`vitestNestjsConfig`)                          |
 | `@djblackeagle/dev-config-js/commitlint`            | Commitlint        | Conventional Commits preset (`commitlintConfig`, `createCommitlintConfig`)       |
 | `@djblackeagle/dev-config-js/lint-staged`           | lint-staged       | Pre-commit staged files preset (`lintStagedConfig`, `createLintStagedConfig`)    |
-| `@djblackeagle/dev-config-js/devcontainer/*.json`   | DevContainer      | Ready-to-use Node 24 DevContainer templates (`library`, `nestjs`, `angular`)     |
 
 ## Getting Started
 
@@ -290,28 +288,6 @@ export default createLintStagedConfig({
   '*.{html,scss}': ['prettier --write'],
 });
 ```
-
-### DevContainer Templates
-
-Ready-to-use `.devcontainer/devcontainer.json` templates are included for Node.js 24 TypeScript projects:
-
-- **Shared TypeScript Library:**
-
-  ```bash
-  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/library.json .devcontainer/devcontainer.json
-  ```
-
-- **NestJS Backend (forwards ports `3000` and `9229`):**
-
-  ```bash
-  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/nestjs.json .devcontainer/devcontainer.json
-  ```
-
-- **Angular Frontend (forwards port `4200` and includes Angular Language Service):**
-
-  ```bash
-  mkdir -p .devcontainer && cp node_modules/@djblackeagle/dev-config-js/dist/devcontainer/angular.json .devcontainer/devcontainer.json
-  ```
 
 ## End-to-End Stack Integration Guides
 
