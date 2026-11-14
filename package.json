@@ -27,6 +27,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./prettier": {
+      "types": "./dist/prettier/index.d.ts",
+      "import": "./dist/prettier/index.js",
+      "default": "./dist/prettier/index.js"
+    },
     "./tsconfig/*": "./dist/tsconfig/*",
     "./tsconfig/*.json": "./dist/tsconfig/*.json"
   },
@@ -66,7 +71,9 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prettier": "^3.9.10"
+  },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
@@ -79,7 +86,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "markdownlint-cli2": "^0.24.0",
-    "prettier": "^3.9.10",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",

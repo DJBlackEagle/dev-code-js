@@ -36,6 +36,9 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 
 ```text
 ├── src/
+│   ├── prettier/
+│   │   ├── index.ts                 # Shared Prettier Configuration Preset
+│   │   └── index.spec.ts            # Co-located Unit Spec for Prettier Preset
 │   ├── tsconfig/
 │   │   ├── angular.json             # Angular TypeScript Preset
 │   │   ├── base.json                # Strict Base TypeScript Preset

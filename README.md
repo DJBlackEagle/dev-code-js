@@ -90,6 +90,26 @@ Extend one of the modular TypeScript presets in your project's `tsconfig.json`:
   }
   ```
 
+### Prettier Preset
+
+Reference the shared Prettier preset directly in your `package.json`:
+
+```json
+{
+  "prettier": "@djblackeagle/dev-config-js/prettier"
+}
+```
+
+Or import and extend it in `prettier.config.js` to customize options:
+
+```js
+import prettierConfig from '@djblackeagle/dev-config-js/prettier';
+
+export default {
+  ...prettierConfig,
+};
+```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to
