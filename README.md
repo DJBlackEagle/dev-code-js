@@ -217,6 +217,28 @@ Use the modular Vitest presets in your project's `vitest.config.ts`:
   });
   ```
 
+### Commitlint Preset
+
+Use the shared Commitlint Conventional Commits preset in your project's `commitlint.config.js`:
+
+```js
+import commitlintConfig from '@djblackeagle/dev-config-js/commitlint';
+
+export default commitlintConfig;
+```
+
+Or customize rules using `createCommitlintConfig`:
+
+```js
+import { createCommitlintConfig } from '@djblackeagle/dev-config-js/commitlint';
+
+export default createCommitlintConfig({
+  rules: {
+    'header-max-length': [2, 'always', 120],
+  },
+});
+```
+
 ## Contributing
 
 We welcome contributions from the community! If you're interested in helping to
