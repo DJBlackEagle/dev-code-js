@@ -37,6 +37,8 @@
       "import": "./dist/eslint/*.js",
       "default": "./dist/eslint/*.js"
     },
+    "./markdownlint": "./dist/markdownlint/index.jsonc",
+    "./markdownlint/index.jsonc": "./dist/markdownlint/index.jsonc",
     "./prettier": {
       "types": "./dist/prettier/index.d.ts",
       "import": "./dist/prettier/index.js",
@@ -70,7 +72,7 @@
     "clean:coverage": "rm -rf coverage",
     "prepublishOnly": "pnpm run clean:build && pnpm run build",
     "build": "tsc -p tsconfig.build.json && pnpm run build:assets",
-    "build:assets": "mkdir -p dist/tsconfig && cp src/tsconfig/*.json dist/tsconfig/",
+    "build:assets": "mkdir -p dist/tsconfig dist/markdownlint && cp src/tsconfig/*.json dist/tsconfig/ && cp src/markdownlint/*.jsonc dist/markdownlint/",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . && markdownlint-cli2",
     "lint:fix": "eslint . --fix && markdownlint-cli2 --fix",
@@ -88,6 +90,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^65.4.6",
     "globals": "^17.14.0",
+    "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
     "typescript-eslint": "^8.72.2"
   },
@@ -100,7 +103,6 @@
     "eslint": "^10.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "markdownlint-cli2": "^0.24.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.1.0"
