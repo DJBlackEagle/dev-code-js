@@ -54,10 +54,13 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   └── index.spec.ts            # Co-located Unit Spec for Prettier Preset
 │   ├── tsconfig/
 │   │   ├── angular.json             # Angular TypeScript Preset
+│   │   ├── angular.spec.ts          # Co-located Unit Spec
 │   │   ├── base.json                # Strict Base TypeScript Preset
+│   │   ├── base.spec.ts             # Co-located Unit Spec
 │   │   ├── library.json             # Shared Library TypeScript Preset
+│   │   ├── library.spec.ts          # Co-located Unit Spec
 │   │   ├── nestjs.json              # NestJS TypeScript Preset
-│   │   └── tsconfig.spec.ts         # Co-located Unit Spec for TS Presets
+│   │   └── nestjs.spec.ts           # Co-located Unit Spec
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
