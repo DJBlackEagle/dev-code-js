@@ -64,6 +64,13 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   ├── library.spec.ts          # Co-located Unit Spec
 │   │   ├── nestjs.json              # NestJS TypeScript Preset
 │   │   └── nestjs.spec.ts           # Co-located Unit Spec
+│   ├── vitest/
+│   │   ├── base.ts                  # Base Vitest Configuration Preset (Library / Node.js)
+│   │   ├── base.spec.ts             # Co-located Unit Spec
+│   │   ├── index.ts                 # Central Vitest Exports
+│   │   ├── index.spec.ts            # Co-located Unit Spec
+│   │   ├── nestjs.ts                # NestJS Vitest Configuration Preset
+│   │   └── nestjs.spec.ts           # Co-located Unit Spec
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
