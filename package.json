@@ -32,6 +32,8 @@
       "import": "./dist/commitlint/index.js",
       "default": "./dist/commitlint/index.js"
     },
+    "./devcontainer/*": "./dist/devcontainer/*",
+    "./devcontainer/*.json": "./dist/devcontainer/*.json",
     "./eslint": {
       "types": "./dist/eslint/index.d.ts",
       "import": "./dist/eslint/index.js",
@@ -92,7 +94,7 @@
     "clean:coverage": "rm -rf coverage",
     "prepublishOnly": "pnpm run clean:build && pnpm run build",
     "build": "tsc -p tsconfig.build.json && pnpm run build:assets",
-    "build:assets": "mkdir -p dist/tsconfig dist/markdownlint && cp src/tsconfig/*.json dist/tsconfig/ && cp src/markdownlint/*.jsonc dist/markdownlint/",
+    "build:assets": "mkdir -p dist/devcontainer dist/tsconfig dist/markdownlint && cp src/devcontainer/*.json dist/devcontainer/ && cp src/tsconfig/*.json dist/tsconfig/ && cp src/markdownlint/*.jsonc dist/markdownlint/",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . && markdownlint-cli2",
     "lint:fix": "eslint . --fix && markdownlint-cli2 --fix",
