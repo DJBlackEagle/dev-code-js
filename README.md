@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)][REF_INTERN_FILE_MD_LICENSE]
 [![CodeQL](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CODEQL]
 [![Build Status](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_CQAT]
+[![Release & Publish](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/release.yml/badge.svg)][REF_INTERN_URL_WORKFLOW_RELEASE]
 [![Dependabot Updates](https://github.com/DJBlackEagle/dev-code-js/actions/workflows/dependabot/dependabot-updates/badge.svg)][REF_INTERN_URL_WORKFLOW_DEPENDABOT]
 [![Code Style](https://img.shields.io/badge/code_style-@djblackeagle--dev--config--js-blue.svg)][REF_INTERN_FILE_MD_README]
 
@@ -513,3 +514,4 @@ This project is licensed under the [MIT License][REF_INTERN_FILE_MD_LICENSE].
 [REF_INTERN_URL_WORKFLOW_CODEQL]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/codeql.yml
 [REF_INTERN_URL_WORKFLOW_CQAT]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/pullrequest-status-checks.yml
 [REF_INTERN_URL_WORKFLOW_DEPENDABOT]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/dependabot/dependabot-updates
+[REF_INTERN_URL_WORKFLOW_RELEASE]: https://github.com/DJBlackEagle/dev-code-js/actions/workflows/release.yml

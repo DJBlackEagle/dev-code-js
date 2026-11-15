@@ -4,29 +4,9 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**.md'
-      - '.editorconfig'
-      - '.gitattributes'
-      - '.gitignore'
-      - '.markdownlint-cli2.jsonc'
-      - '.prettierignore'
-      - '.prettierrc.json'
-      - '.vscode/**'
-      - 'CODEOWNERS'
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - '**.md'
-      - '.editorconfig'
-      - '.gitattributes'
-      - '.gitignore'
-      - '.markdownlint-cli2.jsonc'
-      - '.prettierignore'
-      - '.prettierrc.json'
-      - '.vscode/**'
-      - 'CODEOWNERS'
   schedule:
     - cron: '21 20 * * 0'
 
