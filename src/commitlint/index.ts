@@ -15,6 +15,10 @@ interface CommitlintConfigOptions {
 
 const commitlintConfig: CommitlintConfigOptions = {
   extends: ['@commitlint/config-conventional'],
+  rules: {
+    'body-max-line-length': [2, 'always', 200],
+    'footer-max-line-length': [2, 'always', 200],
+  },
 };
 
 /**
@@ -26,6 +30,10 @@ function createCommitlintConfig(overrides: CommitlintConfigOptions = {}): Commit
   return {
     ...commitlintConfig,
     ...overrides,
+    rules: {
+      ...commitlintConfig.rules,
+      ...overrides.rules,
+    },
   };
 }
 
