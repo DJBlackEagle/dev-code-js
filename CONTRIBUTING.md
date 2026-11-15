@@ -160,15 +160,17 @@ Enhancement suggestions are tracked as [issues][REF_INTERN_URL_ISSUE_LIST].
 
 1. Fork the repository and clone it locally.
 2. Install dependencies via `pnpm install`.
-3. Create a feature or fix branch (e.g., `feat/tsconfig-presets` or `fix/eslint-rule`).
-4. Implement your changes and co-locate unit tests (`*.spec.ts`).
-5. Verify your changes before committing:
+3. Create a feature or fix branch from `main` (e.g., `feat/tsconfig-presets` or `fix/eslint-rule`).
+4. Implement your changes with signed commits and co-locate unit tests (`*.spec.ts`).
+5. Keep your branch up to date with `git rebase main` rather than creating merge commits (`git merge main`).
+6. Verify your changes before committing:
    - `pnpm format` (Check code formatting)
    - `pnpm lint` (Run ESLint and Markdownlint)
    - `pnpm typecheck` (Run TypeScript type checking)
    - `pnpm test` (Run Vitest test suite with coverage)
    - `pnpm build` (Verify production build)
-6. Open a Pull Request against `main`.
+7. Open a Pull Request against `main` using `.github/PULL_REQUEST_TEMPLATE.md`. Pull requests are integrated via
+   **Squash and merge** once all required status checks pass.
 
 ### Improving The Documentation
 
@@ -248,7 +250,7 @@ The following is the list of supported scopes:
 - **markdownlint**: for changes to Markdownlint configurations
 - **commitlint**: for changes to Commitlint configurations
 - **lint-staged**: for changes to Lint-Staged configurations
-- **devcontainer**: for changes to DevContainer templates
+- **devcontainer**: for changes to the repository DevContainer setup
 - **deps**: for dependency updates
 
 If your change affects more than one module, separate the scopes with a
