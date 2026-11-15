@@ -101,6 +101,7 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 ├── .markdownlint-cli2.jsonc         # Markdownlint Rules & Ignores
 ├── .prettierrc.json                 # Prettier Rules
 ├── .prettierignore                  # Prettier Exclusions
+├── .release-please-manifest.json    # Release Please Version Manifest
 ├── AGENTS.md                        # AI Agent Guidelines & Engineering Standards
 ├── CODE_OF_CONDUCT.md               # Contributor Covenant Code of Conduct
 ├── CODEOWNERS                       # Repository Code Owners
@@ -111,6 +112,7 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 ├── package.json                     # Scripts, Exports & Dependencies
 ├── pnpm-workspace.yaml              # pnpm Supply-Chain & Build Policies
 ├── README.md                        # Project Documentation & Quickstart
+├── release-please-config.json       # Release Please Configuration
 ├── SECURITY.md                      # Security & Vulnerability Disclosure Policy
 ├── tsconfig.json                    # Base TypeScript Config (Workspace/Editor)
 ├── tsconfig.build.json              # Production Build (excludes *.spec.ts)

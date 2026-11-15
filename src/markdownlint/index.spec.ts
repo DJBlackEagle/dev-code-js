@@ -37,7 +37,13 @@ describe('Markdownlint Configuration Preset (index.jsonc)', () => {
         },
       },
       globs: ['**/*.md'],
-      ignores: ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.tmp/**'],
+      ignores: [
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/coverage/**',
+        '**/.tmp/**',
+        '**/CHANGELOG.md',
+      ],
     });
   });
 

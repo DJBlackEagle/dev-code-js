@@ -1,0 +1,73 @@
+name: 'Release & Publish'
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release Please
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - release
+    if: needs.release.outputs.release_created == 'true'
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.tag_name }}
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies 🔧
+        run: pnpm install --frozen-lockfile
+      - name: Run Prettier 📃
+        run: pnpm run format
+      - name: Run ESLint & Markdownlint 📝
+        run: pnpm run lint
+      - name: Run TypeScript Typecheck 🔍
+        run: pnpm run typecheck
+      - name: Run Vitest 🧪
+        run: pnpm run test
+      - name: Run Production Build 🏗️
+        run: pnpm run build
+      - name: Publish to npm 🚀
+        run: pnpm publish --provenance --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
