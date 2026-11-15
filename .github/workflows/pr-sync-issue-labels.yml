@@ -1,0 +1,92 @@
+name: 'Sync Issue Labels to PR'
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  sync-labels:
+    name: Sync labels from linked issues
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Sync labels from linked issues
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const ignoredLabels = new Set([
+              'needs-triage',
+              'in-progress',
+              'blocked',
+              'stale',
+              'no-stale',
+              'incomplete',
+              'invalid',
+              'duplicate',
+              'wontfix',
+            ]);
+
+            const { owner, repo } = context.repo;
+            const prNumber = context.payload.pull_request.number;
+
+            const result = await github.graphql(
+              `
+                query ($owner: String!, $repo: String!, $prNumber: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $prNumber) {
+                      closingIssuesReferences(first: 20) {
+                        nodes {
+                          number
+                          labels(first: 50) {
+                            nodes {
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `,
+              { owner, repo, prNumber },
+            );
+
+            const linkedIssues = result.repository.pullRequest.closingIssuesReferences.nodes;
+            if (linkedIssues.length === 0) {
+              core.info('No linked closing issues found.');
+              return;
+            }
+
+            const labelsToAdd = [
+              ...new Set(
+                linkedIssues
+                  .flatMap((issue) => issue.labels.nodes.map((label) => label.name))
+                  .filter((name) => !ignoredLabels.has(name)),
+              ),
+            ];
+
+            if (labelsToAdd.length === 0) {
+              core.info('No eligible labels to sync from linked issues.');
+              return;
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: prNumber,
+              labels: labelsToAdd,
+            });
+
+            core.info(`Synced labels to PR #${prNumber}: ${labelsToAdd.join(', ')}`);
