@@ -206,8 +206,8 @@ and a **subject**:
 
 The **header** is mandatory, while the **scope** of the header is optional.
 
-No line in the commit message should exceed 100 characters. This ensures better
-readability on GitHub and in various Git tools.
+The commit **header** must not exceed 100 characters, and lines in the **body** or **footer** must not exceed
+200 characters. This ensures better readability on GitHub and in various Git tools.
 
 Footer should include a [closing reference to an issue](https://help.github.com/articles/closing-issues-via-commit-messages/)
 if applicable.

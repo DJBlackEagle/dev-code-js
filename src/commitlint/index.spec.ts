@@ -16,9 +16,13 @@ describe('Commitlint Configuration Preset (commitlintConfig)', () => {
     expect(defaultCommitlintConfig).toBe(commitlintConfig);
   });
 
-  it('should extend @commitlint/config-conventional by default', () => {
+  it('should extend @commitlint/config-conventional and allow 200-char body/footer lines by default', () => {
     expect(commitlintConfig).toEqual({
       extends: ['@commitlint/config-conventional'],
+      rules: {
+        'body-max-line-length': [2, 'always', 200],
+        'footer-max-line-length': [2, 'always', 200],
+      },
     });
   });
 
@@ -42,6 +46,8 @@ describe('Commitlint Configuration Preset (commitlintConfig)', () => {
 
     expect(customConfig.extends).toEqual(['@commitlint/config-conventional']);
     expect(customConfig.rules).toEqual({
+      'body-max-line-length': [2, 'always', 200],
+      'footer-max-line-length': [2, 'always', 200],
       'header-max-length': [2, 'always', 120],
     });
     expect(customConfig.ignores).toEqual([ignoreWip]);
