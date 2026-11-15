@@ -10,15 +10,16 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 - **Runtime:** Node.js 24 (LTS) in a DevContainer environment
 - **Package Manager:** `pnpm` (exclusively use `pnpm` – never `npm` or `yarn`)
 - **Module System:** Pure ECMAScript Modules (`"type": "module"` in `package.json`)
-- **Language:** TypeScript 5+ with strict type checking (`"strict": true`, `"verbatimModuleSyntax": true`)
+- **Language:** TypeScript 6 (`^6.0.3`, `<6.1.0` for `typescript-eslint` compatibility) with strict type checking
+  (`"strict": true`, `"verbatimModuleSyntax": true`, `"exactOptionalPropertyTypes": true`)
 - **Target Stacks Provided by Package:**
   - **Shared Libraries:** Pure TypeScript (Node.js & Universal)
   - **Backend:** NestJS
   - **Frontend:** Angular
 - **Testing:** `vitest` with V8 coverage (`@vitest/coverage-v8`) and test UI (`@vitest/ui`)
-- **Linting & Formatting:** ESLint 9 (Flat Config `eslint.config.js` with `typescript-eslint` Strict/Stylistic type
+- **Linting & Formatting:** ESLint 10 (Flat Config `eslint.config.js` with `typescript-eslint` Strict/Stylistic type
   checking), `markdownlint-cli2`, and Prettier
-- **Git Tooling:** `husky`, `commitlint` (`@commitlint/config-conventional`), and `lint-staged`
+- **Git Tooling:** `husky`, `commitlint` (configured via `commitlint.config.js`), and `lint-staged`
 
 ---
 
@@ -133,7 +134,9 @@ Always execute commands via `pnpm`:
 - **Check formatting:** `pnpm format` (`prettier --check .`)
 - **Apply formatting:** `pnpm format:fix` (`prettier --write .`)
 - **Clean workspace:** `pnpm clean` (executes `clean:build`, `clean:node`, `clean:coverage`)
-- **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json && pnpm run build:assets`)
+- **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json && pnpm run build:assets`, where
+  `build:assets` runs modular `build:assets:*` sub-scripts via `pnpm run "/^build:assets:.*/"`, such as
+  `build:assets:markdownlint` and `build:assets:tsconfig`)
 
 ### Verification Strategy by Change Scope
 
@@ -159,9 +162,9 @@ for the scope of modified files:
    - Node built-in modules must always use the `node:` prefix (e.g., `import path from 'node:path';`,
      `import { fileURLToPath } from 'node:url';`).
    - No legacy CommonJS artifacts (`require`, `module.exports`, `__dirname` – use `import.meta.dirname` instead).
-3. **Source Code Language:**
-   - All source code comments (JSDoc, inline) and console messages (`console.warn`, `console.error`) must be written
-     in **English**.
+3. **Repository Language:**
+   - All repository artifacts—source code, inline comments, JSDoc, outputs/error messages, documentation (`*.md`),
+     GitHub issues, commit messages, and pull request descriptions—must be written in **English**.
 4. **Grouped Exports at File End (Revealing Module Pattern):**
    - No inline named exports (`export function ...`, `export const ...`). All functions, classes, constants,
      interfaces, and types must be declared locally.
@@ -177,9 +180,10 @@ for the scope of modified files:
 
 ## 5. Configuration Package Specific Guidelines
 
-1. **ESLint 9 Flat Config Exclusively:**
-   - All ESLint configurations must strictly use the modern ESLint v9 Flat Config array/object format
-     (`typescript-eslint` `tseslint.config(...)`). Legacy `.eslintrc` formats are strictly prohibited.
+1. **ESLint 10 Flat Config Exclusively:**
+   - All ESLint configurations must strictly use the modern ESLint v10 Flat Config array/object format with typed
+     `ConfigArray` arrays (`import type { ConfigArray } from 'typescript-eslint'`). Avoid deprecated
+     `tseslint.config(...)` helpers and legacy `.eslintrc` formats.
 2. **Modular & Composable Presets:**
    - Configurations must be modularly separated (`base`, `library`, `nestjs`, `angular`, `vitest`, `prettier`) so
      consumers can either use complete stack presets or compose individual building blocks.
@@ -187,30 +191,69 @@ for the scope of modified files:
    - Importing any preset or module from `@djblackeagle/dev-config-js` must be completely side-effect-free. Modules
      must only construct and return configuration objects or arrays.
 4. **Self-Dogfooding:**
-   - As configuration presets (`tsconfig`, `prettier`, `eslint`, `vitest`, `markdownlint`, `commitlint`,
-     `lint-staged`) are implemented in `src/`, this repository's own root configurations must adopt and validate them.
+   - All implemented configuration presets (`tsconfig`, `prettier`, `eslint`, `vitest`, `markdownlint`, `commitlint`,
+     `lint-staged`) are adopted by this repository's root configurations or verified against them via co-located
+     `*.spec.ts` synchronization tests.
 
 ---
 
-## 6. Agent Do's & Don'ts
+## 6. Git, Issue & Pull Request Workflow
+
+1. **Plan-First & Iterative Approval:**
+   - Before making any code or file changes, present a concrete implementation plan and wait for explicit user
+     approval.
+   - If the user initiates a discussion or requests changes to the plan, present the updated plan and wait for
+     approval again before modifying any files.
+2. **Pre-Implementation Branch Verification:**
+   - Before starting implementation, check whether the workspace is on the matching issue branch (`git status -sb` /
+     `git fetch`).
+   - If not on the right branch: if the matching branch already exists locally or on `origin`, check it out
+     (`git checkout <branch>`). If it does not exist yet, notify the user and wait until they create it—never create
+     a new branch automatically.
+3. **Issues First:**
+   - Always create a GitHub issue in English following the templates in `.github/ISSUE_TEMPLATE/` before starting
+     implementation.
+4. **Branching, Rebasing & Merging:**
+   - Follow `1 Issue = 1 Branch = 1 Pull Request`. Never push directly to `main`.
+   - Keep feature branches up to date with `git rebase main` rather than creating merge commits (`git merge main`).
+   - Pull requests are integrated into `main` via **Squash and merge** with linear history, signed commits, and the
+     passing `All status checks passed` CI gate.
+5. **Commit Messages:**
+   - Write commit messages in English following Conventional Commits as enforced by `commitlint.config.js`, and include
+     `Closes #<number>` in the footer when resolving an issue.
+6. **Pull Requests:**
+   - Write PR titles (Conventional Commits) and descriptions in English following `.github/PULL_REQUEST_TEMPLATE.md`.
+7. **Post-Implementation Handover:**
+   - After completing implementation and verification, always output a ready-to-use **commit message** (Conventional
+     Commits per `commitlint.config.js`, including `Closes #<number>`) and a **PR title + description** following
+     `.github/PULL_REQUEST_TEMPLATE.md`.
+
+---
+
+## 7. Agent Do's & Don'ts
 
 - **DO:**
+  - Always present a plan (and any updated plan after discussion) for approval and verify the active issue branch before
+    modifying files.
+  - Always provide a matching commit message and PR description after finishing implementation and verification.
   - Always co-locate unit tests alongside source files as `*.spec.ts`.
   - Always declare symbols locally and group exports in a single `export { ... };` statement at the end of each file.
   - Apply scoped verification matching the change scope (see Section 3): For pure documentation (`*.md`) or
     formatting rules, running `pnpm format` and `pnpm lint` is sufficient. Run `pnpm typecheck`, `pnpm lint`, and
     relevant tests (`pnpm test:unit` or `pnpm test`) whenever TypeScript source code or dependencies are altered.
-  - Monitor test coverage: Run `pnpm test:coverage` whenever adding new features or logic branches, ensuring all new
-    paths, edge cases, and error branches are covered without reducing total coverage.
+  - Monitor test coverage: Run `pnpm test:coverage` whenever adding new features or logic branches, ensuring all
+    metrics at least meet the thresholds configured in `vitest.config.ts` with a target of **100% coverage**.
   - Keep `AGENTS.md` and `README.md` synchronized whenever changing architecture, directory structure, scripts, or
     exported presets.
 - **DON'T:**
+  - Never create new Git branches automatically or modify files before an issue exists, the plan is approved, and the
+    correct issue branch is checked out.
   - Never execute heavy test suites (`pnpm test`) unnecessarily when only markdown documents, JSON config data,
     comments, or formatting rules are modified.
   - Never let `AGENTS.md` or `README.md` become outdated when introducing new features, configuration presets, new
     scripts, or structural adjustments.
   - Never use the file extension `*.test.ts`.
-  - Never leave non-English comments or debugging `console.log` statements in code.
+  - Never leave non-English comments, documentation, commit messages, or PR/issue descriptions.
   - Never modify build, ESLint, or Prettier configurations without explicit user consultation.
   - Never perform unrequested file modifications when the user only asks for a comparison, explanation, or
     recommendation.
