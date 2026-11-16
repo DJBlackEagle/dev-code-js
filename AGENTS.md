@@ -53,6 +53,8 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   ├── markdown.spec.ts         # Co-located Unit Spec
 │   │   ├── nestjs.ts                # NestJS ESLint Flat Config Building Block
 │   │   ├── nestjs.spec.ts           # Co-located Unit Spec
+│   │   ├── package-json.ts          # package.json ESLint Flat Config Building Block
+│   │   ├── package-json.spec.ts     # Co-located Unit Spec
 │   │   ├── prettier.ts              # Prettier Rule Conflict Disabler
 │   │   ├── prettier.spec.ts         # Co-located Unit Spec
 │   │   ├── vitest.ts                # Vitest Spec/Test ESLint Building Block

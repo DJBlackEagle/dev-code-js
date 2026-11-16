@@ -15,7 +15,11 @@ const DEFAULT_JSONC_FILES = [
   '**/.devcontainer/*.json',
   '**/.markdownlint-cli2.jsonc',
 ] as const;
-const DEFAULT_JSON_IGNORES = ['**/package-lock.json', '**/pnpm-lock.yaml'] as const;
+const DEFAULT_JSON_IGNORES = [
+  '**/package.json',
+  '**/package-lock.json',
+  '**/pnpm-lock.yaml',
+] as const;
 
 /**
  * Creates a flat ESLint configuration array for JSON and JSONC files using `@eslint/json`.
