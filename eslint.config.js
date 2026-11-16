@@ -1,5 +1,6 @@
 import eslint from '@eslint/js';
 import json from '@eslint/json';
+import markdown from '@eslint/markdown';
 import vitest from '@vitest/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
@@ -89,6 +90,9 @@ export default tseslint.config(
     ignores: ['**/package-lock.json', '**/pnpm-lock.yaml'],
     plugins: { json },
     language: 'json/jsonc',
+    languageOptions: {
+      allowTrailingCommas: true,
+    },
     rules: {
       ...json.configs.recommended.rules,
     },
@@ -104,6 +108,27 @@ export default tseslint.config(
     rules: {
       'yml/no-empty-mapping-value': 'off',
       'yml/plain-scalar': 'off',
+    },
+  },
+  {
+    files: ['**/*.md'],
+    ignores: ['**/CHANGELOG.md'],
+    plugins: { markdown },
+    processor: 'markdown/markdown',
+  },
+  {
+    files: ['**/*.md/**'],
+    extends: [tseslint.configs.disableTypeChecked],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+      'eol-last': 'off',
+      'no-console': 'off',
+      'no-undef': 'off',
+      'no-unused-expressions': 'off',
+      'no-unused-vars': 'off',
+      'padded-blocks': 'off',
+      strict: 'off',
+      'unicode-bom': 'off',
     },
   },
   eslintConfigPrettier,
