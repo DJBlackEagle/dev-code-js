@@ -6,10 +6,11 @@ on:
       - opened
       - edited
       - reopened
+      - closed
 
 permissions:
   contents: read
-  issues: read
+  issues: write
   pull-requests: write
 
 concurrency:
@@ -66,6 +67,35 @@ jobs:
             const linkedIssues = result.repository.pullRequest.closingIssuesReferences.nodes;
             if (linkedIssues.length === 0) {
               core.info('No linked closing issues found.');
+              return;
+            }
+
+            if (context.payload.action === 'closed') {
+              if (!context.payload.pull_request.merged) {
+                core.info('PR closed without merge; leaving issue labels unchanged.');
+                return;
+              }
+
+              for (const issue of linkedIssues) {
+                const hasInProgress = issue.labels.nodes.some((label) => label.name === 'in-progress');
+                if (!hasInProgress) {
+                  continue;
+                }
+
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner,
+                    repo,
+                    issue_number: issue.number,
+                    name: 'in-progress',
+                  });
+                  core.info(`Removed "in-progress" label from issue #${issue.number}.`);
+                } catch (error) {
+                  if (error.status !== 404) {
+                    throw error;
+                  }
+                }
+              }
               return;
             }
 
