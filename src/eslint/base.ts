@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import importX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
 import nodePlugin from 'eslint-plugin-n';
@@ -57,10 +58,14 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       jsdoc.configs['flat/recommended-typescript'],
+      comments.recommended,
     ]),
     {
       name: '@djblackeagle/dev-config-js/base',
       files: [...JS_TS_FILES],
+      linterOptions: {
+        reportUnusedDisableDirectives: 'error',
+      },
       plugins: {
         'import-x': importX,
         n: nodePlugin,
@@ -87,6 +92,11 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
           },
         ],
         'no-console': 'error',
+        '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
+        '@eslint-community/eslint-comments/require-description': [
+          'error',
+          { ignore: ['eslint-enable'] },
+        ],
         'import-x/first': 'error',
         'import-x/newline-after-import': 'error',
         'import-x/no-duplicates': 'error',

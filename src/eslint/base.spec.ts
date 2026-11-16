@@ -16,8 +16,16 @@ describe('ESLint Base Configuration (base.ts)', () => {
     const rulesBlock = baseConfig.find(
       (entry) => entry.name === '@djblackeagle/dev-config-js/base',
     );
+    expect(rulesBlock?.linterOptions).toEqual({
+      reportUnusedDisableDirectives: 'error',
+    });
     expect(rulesBlock?.rules).toMatchObject({
       '@typescript-eslint/no-explicit-any': 'error',
+      '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
+      '@eslint-community/eslint-comments/require-description': [
+        'error',
+        { ignore: ['eslint-enable'] },
+      ],
       'import-x/first': 'error',
       'import-x/no-duplicates': 'error',
       'n/prefer-node-protocol': 'error',
