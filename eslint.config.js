@@ -1,6 +1,7 @@
 import eslint from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
+import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import vitest from '@vitest/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importX from 'eslint-plugin-import-x';
@@ -29,9 +30,13 @@ export default tseslint.config(
     ...tseslint.configs.strictTypeChecked,
     ...tseslint.configs.stylisticTypeChecked,
     jsdoc.configs['flat/recommended-typescript'],
+    comments.recommended,
   ].map((entry) => ({ ...entry, files: entry.files ?? JS_TS_FILES })),
   {
     files: JS_TS_FILES,
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
+    },
     plugins: {
       'import-x': importX,
       n: nodePlugin,
@@ -61,6 +66,11 @@ export default tseslint.config(
         },
       ],
       'no-console': 'error',
+      '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
+      '@eslint-community/eslint-comments/require-description': [
+        'error',
+        { ignore: ['eslint-enable'] },
+      ],
       'import-x/first': 'error',
       'import-x/newline-after-import': 'error',
       'import-x/no-duplicates': 'error',
