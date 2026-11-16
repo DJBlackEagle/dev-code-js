@@ -102,6 +102,7 @@
     "prepublishOnly": "pnpm run clean:build && pnpm run build",
     "test": "vitest run --coverage.enabled --coverage.reporter=text",
     "test:coverage": "vitest run --coverage",
+    "test:smoke": "node tests/smoke.mjs",
     "test:unit": "vitest run src --coverage.enabled --coverage.reporter=text",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",

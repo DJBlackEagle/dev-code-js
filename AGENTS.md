@@ -91,7 +91,8 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   ├── index.ts                     # Public Package Root Exports
 │   └── index.spec.ts                # Co-located Unit Spec
 ├── tests/
-│   └── package-exports.spec.ts      # End-to-End Package & Stack Verification Spec
+│   ├── package-exports.spec.ts      # End-to-End Package & Stack Verification Spec
+│   └── smoke.mjs                    # Packed Consumer Smoke Test Runner
 ├── .devcontainer/                   # Repository DevContainer Setup (Node 18-26 via NVM)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/              # Structured GitHub Issue Forms
@@ -139,6 +140,9 @@ Always execute commands via `pnpm`:
 - **Run typecheck:** `pnpm typecheck` (`tsc --noEmit`)
 - **Run all tests with text coverage:** `pnpm test` (`vitest run --coverage.enabled --coverage.reporter=text`)
 - **Run unit tests:** `pnpm test:unit` (`vitest run src --coverage.enabled --coverage.reporter=text`)
+- **Run consumer smoke test:** `pnpm test:smoke` (`node tests/smoke.mjs`, installs packed tarball into a clean
+  temporary consumer project and runs `tsc`, `eslint`, `prettier`, `vitest`, and `markdownlint-cli2`, run after
+  `pnpm build`)
 - **Run tests in watch mode:** `pnpm test:watch` (`vitest`)
 - **Generate coverage report:** `pnpm test:coverage` (`vitest run --coverage`)
 - **Lint code & markdown:** `pnpm lint` (`eslint . && markdownlint-cli2`)

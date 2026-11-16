@@ -110,6 +110,9 @@ jobs:
       - name: Verify package exports & types 📦
         if: needs.cqat_detect_changes.outputs.code_changed == 'true'
         run: pnpm run verify:package
+      - name: Run consumer smoke test 🧪
+        if: needs.cqat_detect_changes.outputs.code_changed == 'true'
+        run: pnpm run test:smoke
 
   cqat_test_units:
     name: Unit tests (Node ${{ matrix.node-version }})
