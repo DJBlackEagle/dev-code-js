@@ -1,0 +1,49 @@
+# Changelog
+
+## 1.0.0 (2026-11-16)
+
+
+### Features
+
+* add organizational templates and repository configuration files ([#11](https://github.com/DJBlackEagle/dev-code-js/issues/11)) ([65becdb](https://github.com/DJBlackEagle/dev-code-js/commit/65becdb8f8ae2de762548d0ce5855428779050ad))
+* **build,ci:** verify package exports and dist artifacts with publint ([#102](https://github.com/DJBlackEagle/dev-code-js/issues/102)) ([bde3fca](https://github.com/DJBlackEagle/dev-code-js/commit/bde3fcafbb7ab97198f18fcbd2fdbe57a3944bca)), closes [#77](https://github.com/DJBlackEagle/dev-code-js/issues/77)
+* **build,ci:** verify TypeScript module resolution with arethetypeswrong ([#103](https://github.com/DJBlackEagle/dev-code-js/issues/103)) ([e4601b3](https://github.com/DJBlackEagle/dev-code-js/commit/e4601b3ac0ad937fedf4fcd9b7e1e3f453ff7c09)), closes [#80](https://github.com/DJBlackEagle/dev-code-js/issues/80)
+* **cli:** add init CLI to scaffold stack configurations ([#105](https://github.com/DJBlackEagle/dev-code-js/issues/105)) ([0ece3d3](https://github.com/DJBlackEagle/dev-code-js/commit/0ece3d394786640981b3ad417745a7e2ce1e3e55)), closes [#82](https://github.com/DJBlackEagle/dev-code-js/issues/82)
+* **commitlint:** add shared Commitlint Conventional Commits preset ([#28](https://github.com/DJBlackEagle/dev-code-js/issues/28)) ([24e34b7](https://github.com/DJBlackEagle/dev-code-js/commit/24e34b7113582308ccc5623359f8e3ab61f467af)), closes [#7](https://github.com/DJBlackEagle/dev-code-js/issues/7)
+* **commitlint:** increase body and footer max line length to 200 ([#42](https://github.com/DJBlackEagle/dev-code-js/issues/42)) ([b105e8d](https://github.com/DJBlackEagle/dev-code-js/commit/b105e8d572fbfea5d91a53b9a07d033596c5758c)), closes [#41](https://github.com/DJBlackEagle/dev-code-js/issues/41)
+* **devcontainer:** add ready-to-use DevContainer templates (library, nestjs, angular) ([#30](https://github.com/DJBlackEagle/dev-code-js/issues/30)) ([4f149c3](https://github.com/DJBlackEagle/dev-code-js/commit/4f149c3c8b2af49b0073dc3d656bd32f5212de7c)), closes [#9](https://github.com/DJBlackEagle/dev-code-js/issues/9)
+* **eslint:** add CSS linting support to Angular preset via @eslint/css ([#100](https://github.com/DJBlackEagle/dev-code-js/issues/100)) ([9c6c4bd](https://github.com/DJBlackEagle/dev-code-js/commit/9c6c4bdae0a5bee6c953132eb071cb7522abaeea)), closes [#75](https://github.com/DJBlackEagle/dev-code-js/issues/75)
+* **eslint:** add JS/TS best-practice rules, naming conventions, and ignore generated files ([#101](https://github.com/DJBlackEagle/dev-code-js/issues/101)) ([3b811b3](https://github.com/DJBlackEagle/dev-code-js/commit/3b811b3a39a96a398c5b91336e7e0d99a2258205)), closes [#76](https://github.com/DJBlackEagle/dev-code-js/issues/76)
+* **eslint:** add JSON and JSONC linting support via @eslint/json ([#89](https://github.com/DJBlackEagle/dev-code-js/issues/89)) ([b175cba](https://github.com/DJBlackEagle/dev-code-js/commit/b175cba5440b20b1608c39233cebfd418c230af1)), closes [#68](https://github.com/DJBlackEagle/dev-code-js/issues/68)
+* **eslint:** add Markdown code-block linting via @eslint/markdown ([#93](https://github.com/DJBlackEagle/dev-code-js/issues/93)) ([bfa1ba0](https://github.com/DJBlackEagle/dev-code-js/commit/bfa1ba0f61218c82a01e4c23de7cf5f0aefb8263)), closes [#70](https://github.com/DJBlackEagle/dev-code-js/issues/70)
+* **eslint:** add modular ESLint Flat Config presets ([#25](https://github.com/DJBlackEagle/dev-code-js/issues/25)) ([6e3e6d2](https://github.com/DJBlackEagle/dev-code-js/commit/6e3e6d270f4606080a2e2ddde266da989cf730bf))
+* **eslint:** add Node.js ESM and import hygiene linting rules ([#98](https://github.com/DJBlackEagle/dev-code-js/issues/98)) ([93e5669](https://github.com/DJBlackEagle/dev-code-js/commit/93e5669b7aeb4147179ed5befe8b92e544412dfd)), closes [#73](https://github.com/DJBlackEagle/dev-code-js/issues/73)
+* **eslint:** add package.json linting via eslint-plugin-package-json ([#97](https://github.com/DJBlackEagle/dev-code-js/issues/97)) ([4e34937](https://github.com/DJBlackEagle/dev-code-js/commit/4e3493722469438b14119c265d863534c82bf3a3)), closes [#72](https://github.com/DJBlackEagle/dev-code-js/issues/72)
+* **eslint:** add YAML linting support via eslint-plugin-yml ([#92](https://github.com/DJBlackEagle/dev-code-js/issues/92)) ([986d81c](https://github.com/DJBlackEagle/dev-code-js/commit/986d81c13c114bbb8c79cd21cfe72022cbe5ec88)), closes [#69](https://github.com/DJBlackEagle/dev-code-js/issues/69)
+* **eslint:** enforce clean eslint-disable comments and unused directive reporting ([#99](https://github.com/DJBlackEagle/dev-code-js/issues/99)) ([8b94206](https://github.com/DJBlackEagle/dev-code-js/commit/8b94206e04217683e5d87f82ed268c6df109a40f)), closes [#74](https://github.com/DJBlackEagle/dev-code-js/issues/74)
+* initialize project structure with developer tooling and configuration files ([#1](https://github.com/DJBlackEagle/dev-code-js/issues/1)) ([6e389bb](https://github.com/DJBlackEagle/dev-code-js/commit/6e389bbba4b97df253543138b4efec28fe880add))
+* **lint-staged:** add shared lint-staged pre-commit configuration preset ([#29](https://github.com/DJBlackEagle/dev-code-js/issues/29)) ([122dc6a](https://github.com/DJBlackEagle/dev-code-js/commit/122dc6afed8a1840b01c0319c4d4cc83b5f2a91a)), closes [#8](https://github.com/DJBlackEagle/dev-code-js/issues/8)
+* **lint-staged:** include ESLint checks for JSON, JSONC, YAML, and Markdown files ([#96](https://github.com/DJBlackEagle/dev-code-js/issues/96)) ([75909c9](https://github.com/DJBlackEagle/dev-code-js/commit/75909c9cd6fc76a76ed73e04037e95a421e54f47)), closes [#71](https://github.com/DJBlackEagle/dev-code-js/issues/71)
+* **markdownlint:** add shared markdownlint-cli2 configuration preset ([#26](https://github.com/DJBlackEagle/dev-code-js/issues/26)) ([3fd129e](https://github.com/DJBlackEagle/dev-code-js/commit/3fd129eed6c7c161e0234eeac51c29aab0ce2a67)), closes [#5](https://github.com/DJBlackEagle/dev-code-js/issues/5)
+* **prettier:** add shared Prettier configuration preset ([#24](https://github.com/DJBlackEagle/dev-code-js/issues/24)) ([020a162](https://github.com/DJBlackEagle/dev-code-js/commit/020a162397e8ce94ecfa7addfb8728763e794679)), closes [#3](https://github.com/DJBlackEagle/dev-code-js/issues/3)
+* **test,ci:** add packed consumer smoke test for dist artifacts and presets ([#104](https://github.com/DJBlackEagle/dev-code-js/issues/104)) ([1f47d53](https://github.com/DJBlackEagle/dev-code-js/commit/1f47d53b56a316fb0021395f9e3077aff43cdc2e)), closes [#83](https://github.com/DJBlackEagle/dev-code-js/issues/83)
+* **tsconfig:** add modular TypeScript configuration presets ([#23](https://github.com/DJBlackEagle/dev-code-js/issues/23)) ([856c088](https://github.com/DJBlackEagle/dev-code-js/commit/856c0880d74be787e6565a9d00f07ac7b72e0085)), closes [#2](https://github.com/DJBlackEagle/dev-code-js/issues/2)
+* **vitest:** add modular Vitest configuration presets (base, nestjs) ([#27](https://github.com/DJBlackEagle/dev-code-js/issues/27)) ([e7e1960](https://github.com/DJBlackEagle/dev-code-js/commit/e7e19609ddf1dd2773989f3b4d5266a0e1c8d613)), closes [#6](https://github.com/DJBlackEagle/dev-code-js/issues/6)
+
+
+### Bug Fixes
+
+* **workflows:** fix concurrency expression in pr-sync-issue-labels workflow ([#91](https://github.com/DJBlackEagle/dev-code-js/issues/91)) ([732c9cb](https://github.com/DJBlackEagle/dev-code-js/commit/732c9cb028ce66c879f203be39fe76fa316053d0)), closes [#90](https://github.com/DJBlackEagle/dev-code-js/issues/90)
+
+
+### Code Refactoring
+
+* **devcontainer:** remove devcontainer templates from npm package ([#34](https://github.com/DJBlackEagle/dev-code-js/issues/34)) ([c1b609e](https://github.com/DJBlackEagle/dev-code-js/commit/c1b609e3fa4963902558d3a7ce94dc22e2813649))
+
+
+### Documentation
+
+* **agents,contributing:** update engineering standards, git workflow, and coverage goals ([#40](https://github.com/DJBlackEagle/dev-code-js/issues/40)) ([0950055](https://github.com/DJBlackEagle/dev-code-js/commit/0950055417effc8db94e080c2b91fe0b27573910)), closes [#39](https://github.com/DJBlackEagle/dev-code-js/issues/39)
+* **agents:** document github mcp workflow and interactive commit approval ([#57](https://github.com/DJBlackEagle/dev-code-js/issues/57)) ([c715810](https://github.com/DJBlackEagle/dev-code-js/commit/c71581073548d76f6a5cc58e432032adf67ca1a8)), closes [#56](https://github.com/DJBlackEagle/dev-code-js/issues/56)
+* complete end-to-end stack integration guides and final package verification ([#31](https://github.com/DJBlackEagle/dev-code-js/issues/31)) ([56db84c](https://github.com/DJBlackEagle/dev-code-js/commit/56db84c77b780d98865e5818d18684f5b14b7ca8)), closes [#10](https://github.com/DJBlackEagle/dev-code-js/issues/10)
+* **readme:** add Dependabot Updates status badge ([#32](https://github.com/DJBlackEagle/dev-code-js/issues/32)) ([b655a8b](https://github.com/DJBlackEagle/dev-code-js/commit/b655a8b7da2b2d9f34bc3f92c1131f42166a8524))
