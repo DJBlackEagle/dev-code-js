@@ -13,6 +13,7 @@ import {
   createLintStagedConfig,
   createNestjsVitestConfig,
   createVitestConfig,
+  createYamlConfig,
   eslintPresets,
   jsonConfig,
   lintStagedConfig,
@@ -23,6 +24,7 @@ import {
   vitestConfig,
   vitestNestjsConfig,
   vitestPresets,
+  yamlConfig,
 } from '../src/index.js';
 
 interface PackageJsonStructure {
@@ -78,6 +80,8 @@ describe('End-to-End Package Verification & Stack Presets', () => {
     expect(eslintPresets.library.length).toBeGreaterThan(0);
     expect(Array.isArray(jsonConfig)).toBe(true);
     expect(createJsonConfig().length).toBe(2);
+    expect(Array.isArray(yamlConfig)).toBe(true);
+    expect(createYamlConfig().length).toBeGreaterThan(0);
     expect(vitestPresets.base).toBe(vitestBaseConfig);
     expect(createVitestConfig().test?.environment).toBe('node');
     expect(prettierConfig.singleQuote).toBe(true);

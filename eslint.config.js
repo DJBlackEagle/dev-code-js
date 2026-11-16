@@ -3,6 +3,7 @@ import json from '@eslint/json';
 import vitest from '@vitest/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
+import yml from 'eslint-plugin-yml';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -90,6 +91,19 @@ export default tseslint.config(
     language: 'json/jsonc',
     rules: {
       ...json.configs.recommended.rules,
+    },
+  },
+  ...[...yml.configs['flat/standard'], ...yml.configs['flat/prettier']].map((entry) => ({
+    ...entry,
+    files: entry.files ?? ['**/*.{yml,yaml}'],
+    ignores: ['**/pnpm-lock.yaml'],
+  })),
+  {
+    files: ['**/*.{yml,yaml}'],
+    ignores: ['**/pnpm-lock.yaml'],
+    rules: {
+      'yml/no-empty-mapping-value': 'off',
+      'yml/plain-scalar': 'off',
     },
   },
   eslintConfigPrettier,
