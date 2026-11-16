@@ -75,6 +75,8 @@ jobs:
         run: pnpm run build
       - name: Verify package exports & types 📦
         run: pnpm run verify:package
+      - name: Run consumer smoke test 🧪
+        run: pnpm run test:smoke
       - name: Publish to npm 🚀
         run: pnpm publish --provenance --access public --no-git-checks
         env:
