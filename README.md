@@ -144,7 +144,9 @@ export default {
 ### ESLint Flat Config Presets
 
 Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`, `presets.angular`) in your project's
-`eslint.config.js`:
+`eslint.config.js`. All presets build on `baseConfig` (which ignores `dist/**`, `node_modules/**`, `coverage/**`,
+`*.d.ts`, `.tmp/**`, and `**/generated/**` by default, and enforces Prettier-compatible JS/TS best-practice rules and
+strict `@typescript-eslint/naming-convention` rules):
 
 - **Shared TypeScript Library:**
 

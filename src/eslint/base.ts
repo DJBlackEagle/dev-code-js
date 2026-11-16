@@ -20,7 +20,14 @@ interface ParserOptions {
   tsconfigRootDir?: string;
 }
 
-const DEFAULT_IGNORES = ['dist/**', 'node_modules/**', 'coverage/**', '*.d.ts', '.tmp/**'] as const;
+const DEFAULT_IGNORES = [
+  'dist/**',
+  'node_modules/**',
+  'coverage/**',
+  '*.d.ts',
+  '.tmp/**',
+  '**/generated/**',
+] as const;
 const JS_TS_FILES = ['**/*.{js,mjs,cjs,ts,mts,cts}'] as const;
 
 function scopeToJsTs(configs: ConfigArray): ConfigArray {
@@ -92,6 +99,81 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
           },
         ],
         'no-console': 'error',
+        eqeqeq: ['error', 'always'],
+        curly: 'error',
+        'no-eval': 'error',
+        'no-implied-eval': 'error',
+        'default-case-last': 'error',
+        'no-param-reassign': 'error',
+        'object-shorthand': 'error',
+        'prefer-template': 'error',
+        'no-else-return': 'error',
+        'no-useless-return': 'error',
+        '@typescript-eslint/naming-convention': [
+          'error',
+          {
+            selector: 'default',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'variable',
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+            leadingUnderscore: 'allow',
+          },
+          {
+            selector: 'function',
+            format: ['camelCase', 'PascalCase'],
+          },
+          {
+            selector: 'parameter',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+          },
+          {
+            selector: 'typeLike',
+            format: ['PascalCase'],
+          },
+          {
+            selector: 'interface',
+            format: ['PascalCase'],
+            custom: {
+              regex: '^I[A-Z]',
+              match: false,
+            },
+          },
+          {
+            selector: 'typeAlias',
+            format: ['PascalCase'],
+            custom: {
+              regex: '^T[A-Z]',
+              match: false,
+            },
+          },
+          {
+            selector: 'enumMember',
+            format: ['PascalCase', 'UPPER_CASE'],
+          },
+          {
+            selector: ['objectLiteralProperty', 'typeProperty'],
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+            leadingUnderscore: 'allow',
+          },
+          {
+            selector: ['objectLiteralProperty', 'typeProperty', 'classProperty', 'default'],
+            modifiers: ['requiresQuotes'],
+            format: null,
+          },
+          {
+            selector: 'default',
+            filter: {
+              regex: '^(_id|__typename)$',
+              match: true,
+            },
+            format: null,
+          },
+        ],
         '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
         '@eslint-community/eslint-comments/require-description': [
           'error',
