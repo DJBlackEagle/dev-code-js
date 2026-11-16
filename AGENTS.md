@@ -149,7 +149,9 @@ Always execute commands via `pnpm`:
 - **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json && pnpm run build:assets`, where
   `build:assets` runs modular `build:assets:*` sub-scripts via `pnpm run "/^build:assets:.*/"`, such as
   `build:assets:markdownlint` and `build:assets:tsconfig`)
-- **Verify package exports & dist artifacts:** `pnpm verify:package` (`publint --strict`, run after `pnpm build`)
+- **Verify package exports & dist artifacts:** `pnpm verify:package` (`publint --strict` and `pnpm verify:types` via
+  `@arethetypeswrong/cli` (`attw --profile esm-only`), run after `pnpm build`)
+- **Verify TypeScript module resolution:** `pnpm verify:types` (packs tarball via `pnpm pack` and runs `attw`)
 
 ### Verification Strategy by Change Scope
 

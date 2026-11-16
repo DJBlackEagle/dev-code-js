@@ -73,7 +73,7 @@ jobs:
         run: pnpm run test
       - name: Run Production Build 🏗️
         run: pnpm run build
-      - name: Verify package exports with publint 📦
+      - name: Verify package exports & types 📦
         run: pnpm run verify:package
       - name: Publish to npm 🚀
         run: pnpm publish --provenance --access public --no-git-checks
