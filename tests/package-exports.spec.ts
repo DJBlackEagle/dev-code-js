@@ -9,10 +9,12 @@ import {
   createAngularConfig,
   createBaseConfig,
   createCommitlintConfig,
+  createJsonConfig,
   createLintStagedConfig,
   createNestjsVitestConfig,
   createVitestConfig,
   eslintPresets,
+  jsonConfig,
   lintStagedConfig,
   nestjsConfig,
   prettierConfig,
@@ -74,6 +76,8 @@ describe('End-to-End Package Verification & Stack Presets', () => {
   it('should provide complete and cohesive presets for the Shared TypeScript Library stack', () => {
     expect(Array.isArray(eslintPresets.library)).toBe(true);
     expect(eslintPresets.library.length).toBeGreaterThan(0);
+    expect(Array.isArray(jsonConfig)).toBe(true);
+    expect(createJsonConfig().length).toBe(2);
     expect(vitestPresets.base).toBe(vitestBaseConfig);
     expect(createVitestConfig().test?.environment).toBe('node');
     expect(prettierConfig.singleQuote).toBe(true);

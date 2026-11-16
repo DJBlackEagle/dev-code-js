@@ -175,6 +175,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   ```js
   import {
     createBaseConfig,
+    jsonConfig,
     nestjsConfig,
     prettierEslintConfig,
     vitestConfig,
@@ -185,11 +186,15 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
       project: ['./tsconfig.eslint.json'],
       tsconfigRootDir: import.meta.dirname,
     }),
+    ...jsonConfig,
     ...nestjsConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
   ];
   ```
+
+  _(Note: `eslintPresets.library`, `eslintPresets.nestjs`, and `eslintPresets.angular` already include `jsonConfig` for
+  `*.json` and `*.jsonc` linting via `@eslint/json`.)_
 
 ### Markdownlint Preset
 
