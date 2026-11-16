@@ -1,5 +1,7 @@
 import eslint from '@eslint/js';
+import importX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
+import nodePlugin from 'eslint-plugin-n';
 import globals from 'globals';
 import tseslint, { type ConfigArray } from 'typescript-eslint';
 
@@ -59,6 +61,10 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
     {
       name: '@djblackeagle/dev-config-js/base',
       files: [...JS_TS_FILES],
+      plugins: {
+        'import-x': importX,
+        n: nodePlugin,
+      },
       languageOptions: {
         globals: {
           ...globals.node,
@@ -81,6 +87,14 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
           },
         ],
         'no-console': 'error',
+        'import-x/first': 'error',
+        'import-x/newline-after-import': 'error',
+        'import-x/no-duplicates': 'error',
+        'import-x/no-mutable-exports': 'error',
+        'import-x/no-self-import': 'error',
+        'n/no-deprecated-api': 'error',
+        'n/no-process-exit': 'error',
+        'n/prefer-node-protocol': 'error',
         'jsdoc/require-jsdoc': 'off',
         'jsdoc/require-param': 'off',
         'jsdoc/require-returns': 'off',
