@@ -206,29 +206,42 @@ for the scope of modified files:
      approval.
    - If the user initiates a discussion or requests changes to the plan, present the updated plan and wait for
      approval again before modifying any files.
-2. **Pre-Implementation Branch Verification:**
+2. **Issues First (with Optional GitHub MCP Creation):**
+   - Always create a GitHub issue in English following the templates in `.github/ISSUE_TEMPLATE/` and matching labels
+     from `.github/labels.yml` before starting implementation.
+   - When the `github` MCP server is available, the agent may create issues (`issue_write`) upon user approval,
+     including when pre-planning multiple issues ahead of implementation. Otherwise, provide the issue details for
+     manual creation.
+3. **Pre-Implementation Branch Verification & Creation:**
+   - Do **not** create a branch when merely planning or filing issues ahead of time; create the issue branch only when
+     starting implementation of a specific, approved issue.
    - Before starting implementation, check whether the workspace is on the matching issue branch (`git status -sb` /
      `git fetch`).
-   - If not on the right branch: if the matching branch already exists locally or on `origin`, check it out
-     (`git checkout <branch>`). If it does not exist yet, notify the user and wait until they create it—never create
-     a new branch automatically.
-3. **Issues First:**
-   - Always create a GitHub issue in English following the templates in `.github/ISSUE_TEMPLATE/` before starting
-     implementation.
+   - If not on the right branch: if it already exists locally or on `origin`, check it out (`git checkout <branch>`).
+     Otherwise, once the issue exists and the plan is approved, create the branch from `origin/main` (locally via
+     `git checkout -b <issue-number>-<slug> origin/main`, or via `github` MCP `create_branch` if permitted), or wait
+     for the user if manual branch creation is preferred.
 4. **Branching, Rebasing & Merging:**
    - Follow `1 Issue = 1 Branch = 1 Pull Request`. Never push directly to `main`.
    - Keep feature branches up to date with `git rebase main` rather than creating merge commits (`git merge main`).
    - Pull requests are integrated into `main` via **Squash and merge** with linear history, signed commits, and the
      passing `All status checks passed` CI gate.
-5. **Commit Messages:**
+5. **Commit Messages & Signed Local Commits:**
    - Write commit messages in English following Conventional Commits as enforced by `commitlint.config.js`, and include
      `Closes #<number>` in the footer when resolving an issue.
+   - Always create commits locally via `git` so commits remain signed—never commit or push code changes through GitHub
+     MCP file-write APIs (`create_or_update_file`, `push_files`).
 6. **Pull Requests:**
    - Write PR titles (Conventional Commits) and descriptions in English following `.github/PULL_REQUEST_TEMPLATE.md`.
-7. **Post-Implementation Handover:**
+   - When the `github` MCP server is available and the branch has been pushed, the agent may create the PR via
+     `create_pull_request` after user approval.
+7. **Post-Implementation Handover & Interactive Commit Approval:**
    - After completing implementation and verification, always output a ready-to-use **commit message** (Conventional
      Commits per `commitlint.config.js`, including `Closes #<number>`) and a **PR title + description** following
      `.github/PULL_REQUEST_TEMPLATE.md`.
+   - Ask the user whether the agent should execute the local `git commit` (signed) and `git push` (and open the PR via
+     GitHub MCP if available) after they have reviewed the changes—never commit or push without explicit user
+     approval.
 
 ---
 
@@ -237,7 +250,8 @@ for the scope of modified files:
 - **DO:**
   - Always present a plan (and any updated plan after discussion) for approval and verify the active issue branch before
     modifying files.
-  - Always provide a matching commit message and PR description after finishing implementation and verification.
+  - Always output a ready-to-use commit message and PR title/description after finishing implementation and
+    verification, and ask for explicit approval before running `git commit` / `git push`.
   - Always co-locate unit tests alongside source files as `*.spec.ts`.
   - Always declare symbols locally and group exports in a single `export { ... };` statement at the end of each file.
   - Apply scoped verification matching the change scope (see Section 3): For pure documentation (`*.md`) or
@@ -248,8 +262,10 @@ for the scope of modified files:
   - Keep `AGENTS.md` and `README.md` synchronized whenever changing architecture, directory structure, scripts, or
     exported presets.
 - **DON'T:**
-  - Never create new Git branches automatically or modify files before an issue exists, the plan is approved, and the
-    correct issue branch is checked out.
+  - Never create branches or modify files before an issue exists and the plan is approved, and never run `git commit`
+    or `git push` without explicit user confirmation after handover.
+  - Never commit or push file changes via GitHub MCP APIs (`create_or_update_file`, `push_files`), as those bypass
+    local commit signing.
   - Never execute heavy test suites (`pnpm test`) unnecessarily when only markdown documents, JSON config data,
     comments, or formatting rules are modified.
   - Never let `AGENTS.md` or `README.md` become outdated when introducing new features, configuration presets, new
