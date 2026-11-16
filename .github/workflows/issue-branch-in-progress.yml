@@ -1,0 +1,70 @@
+name: 'Label Issue In Progress on Branch Create'
+
+on:
+  create:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  label-in-progress:
+    name: Label linked issue as in-progress
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Add in-progress label to linked issue
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const match = /^(\d+)-/.exec(context.payload.ref);
+            if (!match) {
+              core.info(`Branch "${context.payload.ref}" does not start with an issue number.`);
+              return;
+            }
+
+            const issueNumber = Number(match[1]);
+            const { owner, repo } = context.repo;
+
+            let issue;
+            try {
+              ({ data: issue } = await github.rest.issues.get({
+                owner,
+                repo,
+                issue_number: issueNumber,
+              }));
+            } catch (error) {
+              if (error.status === 404) {
+                core.info(`Issue #${issueNumber} not found.`);
+                return;
+              }
+              throw error;
+            }
+
+            if (issue.pull_request || issue.state !== 'open') {
+              core.info(`#${issueNumber} is not an open issue; skipping.`);
+              return;
+            }
+
+            const existingLabels = new Set(issue.labels.map((label) => label.name));
+
+            if (!existingLabels.has('in-progress')) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                labels: ['in-progress'],
+              });
+              core.info(`Added "in-progress" label to issue #${issueNumber}.`);
+            }
+
+            if (existingLabels.has('needs-triage')) {
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                name: 'needs-triage',
+              });
+              core.info(`Removed "needs-triage" label from issue #${issueNumber}.`);
+            }
