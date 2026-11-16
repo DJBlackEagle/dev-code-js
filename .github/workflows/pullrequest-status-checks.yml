@@ -107,6 +107,9 @@ jobs:
       - name: Run Production Build 🏗️
         if: needs.cqat_detect_changes.outputs.code_changed == 'true'
         run: pnpm run build
+      - name: Verify package exports with publint 📦
+        if: needs.cqat_detect_changes.outputs.code_changed == 'true'
+        run: pnpm run verify:package
 
   cqat_test_units:
     name: Unit tests (Node ${{ matrix.node-version }})

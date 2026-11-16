@@ -149,17 +149,18 @@ Always execute commands via `pnpm`:
 - **Compile production build:** `pnpm build` (`tsc -p tsconfig.build.json && pnpm run build:assets`, where
   `build:assets` runs modular `build:assets:*` sub-scripts via `pnpm run "/^build:assets:.*/"`, such as
   `build:assets:markdownlint` and `build:assets:tsconfig`)
+- **Verify package exports & dist artifacts:** `pnpm verify:package` (`publint --strict`, run after `pnpm build`)
 
 ### Verification Strategy by Change Scope
 
 To optimize turnaround times and avoid redundant compute cycles, execute only the verification commands appropriate
 for the scope of modified files:
 
-| Change Scope                     | Modified Files                                                         | Required Verification Commands                                                          | Redundant / Skip                                   |
-| :------------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- | :------------------------------------------------- |
-| **Documentation & Config Data**  | `*.md`, `.editorconfig`, `.prettierrc.json`, `.gitignore`, `.vscode/*` | `pnpm format` + `pnpm lint`                                                             | ⏭️ Skip `typecheck` and all `test` suites          |
-| **Preset Logic & Specs**         | `src/**/*.ts`, `src/**/*.json`, `src/**/*.jsonc`                       | `pnpm format` + `pnpm lint` + `pnpm typecheck` + `pnpm test:unit`                       | ⏭️ Skip full build unless verifying `dist/` output |
-| **Dependencies & Build Tooling** | `package.json`, `pnpm-lock.yaml`, `tsconfig*.json`, `eslint.config.js` | Full suite: `pnpm format` + `pnpm lint` + `pnpm typecheck` + `pnpm test` + `pnpm build` | —                                                  |
+| Change Scope                     | Modified Files                                                         | Required Verification Commands                                                                                  | Redundant / Skip                                   |
+| :------------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------------------------------------------- |
+| **Documentation & Config Data**  | `*.md`, `.editorconfig`, `.prettierrc.json`, `.gitignore`, `.vscode/*` | `pnpm format` + `pnpm lint`                                                                                     | ⏭️ Skip `typecheck` and all `test` suites          |
+| **Preset Logic & Specs**         | `src/**/*.ts`, `src/**/*.json`, `src/**/*.jsonc`                       | `pnpm format` + `pnpm lint` + `pnpm typecheck` + `pnpm test:unit`                                               | ⏭️ Skip full build unless verifying `dist/` output |
+| **Dependencies & Build Tooling** | `package.json`, `pnpm-lock.yaml`, `tsconfig*.json`, `eslint.config.js` | Full suite: `pnpm format` + `pnpm lint` + `pnpm typecheck` + `pnpm test` + `pnpm build` + `pnpm verify:package` | —                                                  |
 
 ---
 
