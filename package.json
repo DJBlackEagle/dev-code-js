@@ -20,6 +20,9 @@
     "vitest"
   ],
   "type": "module",
+  "bin": {
+    "dev-config-js": "./dist/cli/bin.js"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -88,6 +91,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json && pnpm run build:assets",
     "build:assets": "pnpm run \"/^build:assets:.*/\"",
+    "build:assets:cli": "chmod +x dist/cli/bin.js",
     "build:assets:markdownlint": "mkdir -p dist/markdownlint && cp src/markdownlint/*.jsonc dist/markdownlint/",
     "build:assets:tsconfig": "mkdir -p dist/tsconfig && cp src/tsconfig/*.json dist/tsconfig/",
     "clean": "pnpm run clean:build && pnpm run clean:node && pnpm run clean:coverage",

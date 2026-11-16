@@ -71,6 +71,14 @@ in your project.
 pnpm add -D @djblackeagle/dev-config-js
 ```
 
+To scaffold the matching configuration files automatically for your stack (`library`, `nestjs`, or `angular`), run:
+
+```bash
+pnpm dlx @djblackeagle/dev-config-js init --stack library
+# or: npx @djblackeagle/dev-config-js init --stack nestjs
+# add --force to overwrite existing configuration files
+```
+
 ### TypeScript (`tsconfig`) Presets
 
 Extend one of the modular TypeScript presets in your project's `tsconfig.json`:
