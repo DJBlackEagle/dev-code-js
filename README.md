@@ -282,7 +282,8 @@ export default createCommitlintConfig({
 
 ### Lint-Staged Preset
 
-Use the shared `lint-staged` pre-commit preset in your project's `.lintstagedrc.js`:
+Use the shared `lint-staged` pre-commit preset in your project's `.lintstagedrc.js` (runs `eslint --fix` and
+`prettier --write` on JS/TS, JSON/JSONC, YAML, and Markdown files, plus `markdownlint-cli2 --fix` on Markdown):
 
 ```js
 import lintStagedConfig from '@djblackeagle/dev-config-js/lint-staged';
