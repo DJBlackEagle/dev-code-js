@@ -7,6 +7,7 @@ import {
   createBaseConfig,
   type BaseConfigOptions,
 } from './base.js';
+import { DEFAULT_CSS_FILES, createCssConfig, cssConfig, type CssConfigOptions } from './css.js';
 import {
   DEFAULT_JSONC_FILES,
   DEFAULT_JSON_FILES,
@@ -72,6 +73,7 @@ const eslintPresets: EslintPresets = {
     ...packageJsonConfig,
     ...yamlConfig,
     ...markdownEslintConfig,
+    ...cssConfig,
     ...angularConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -81,6 +83,7 @@ const eslintPresets: EslintPresets = {
 const presets = eslintPresets;
 
 export {
+  DEFAULT_CSS_FILES,
   DEFAULT_IGNORES,
   DEFAULT_JSONC_FILES,
   DEFAULT_JSON_FILES,
@@ -97,10 +100,12 @@ export {
   baseConfig,
   createAngularConfig,
   createBaseConfig,
+  createCssConfig,
   createJsonConfig,
   createMarkdownEslintConfig,
   createPackageJsonConfig,
   createYamlConfig,
+  cssConfig,
   eslintPresets,
   jsonConfig,
   markdownEslintConfig,
@@ -112,6 +117,7 @@ export {
   yamlConfig,
   type AngularConfigOptions,
   type BaseConfigOptions,
+  type CssConfigOptions,
   type EslintPresets,
   type JsonConfigOptions,
   type MarkdownEslintConfigOptions,

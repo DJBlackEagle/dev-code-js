@@ -9,6 +9,7 @@ import {
   createAngularConfig,
   createBaseConfig,
   createCommitlintConfig,
+  createCssConfig,
   createJsonConfig,
   createLintStagedConfig,
   createMarkdownEslintConfig,
@@ -16,6 +17,7 @@ import {
   createPackageJsonConfig,
   createVitestConfig,
   createYamlConfig,
+  cssConfig,
   eslintPresets,
   jsonConfig,
   lintStagedConfig,
@@ -110,6 +112,8 @@ describe('End-to-End Package Verification & Stack Presets', () => {
     expect(eslintPresets.angular.length).toBeGreaterThan(eslintPresets.library.length);
     expect(Array.isArray(angularConfig)).toBe(true);
     expect(createAngularConfig({ prefix: 'ui' }).length).toBeGreaterThan(0);
+    expect(Array.isArray(cssConfig)).toBe(true);
+    expect(createCssConfig().length).toBe(1);
 
     const angularLintStaged = createLintStagedConfig({
       '*.{html,scss}': ['prettier --write'],

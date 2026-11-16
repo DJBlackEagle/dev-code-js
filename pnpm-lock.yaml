@@ -180,6 +180,9 @@ importers:
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.8.1
         version: 4.8.1(eslint@10.14.0(jiti@2.6.1)(supports-color@7.2.0))
+      '@eslint/css':
+        specifier: ^2.0.1
+        version: 2.0.1
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.14.0(jiti@2.6.1)(supports-color@7.2.0))
@@ -637,6 +640,14 @@ packages:
 
   '@eslint/core@1.2.1':
     resolution: {integrity: sha512-MwcE1P+AZ4C6DWlpin/OmOA54mmIZ/+xZuJiQd4SyB29oAJjN30UW9wkKNptW2ctp4cEsvhlLY/CsQ1uoHDloQ==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@eslint/css-tree@4.1.2':
+    resolution: {integrity: sha512-rVcxLmwSkEL3aWS3vAgsTRrQHoYE1b0XcgDtKHDJ92XOkyUpcbS/g0tUJKhvCtlEhYzgKBWsgDd+Z/aPhd166w==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@eslint/css@2.0.1':
+    resolution: {integrity: sha512-1qIQFzuFeTaHF3ewzsj/HUDC9RTDwfBHGWdFvpmOG0R/Tb3Mt+17yltbE10/LK+oglS1fP9+tiG5UzMvWgQY9g==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@eslint/js@10.0.1':
@@ -1944,6 +1955,9 @@ packages:
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
 
+  mdn-data@2.37.2:
+    resolution: {integrity: sha512-rz9YOBGItdSbe7HcSArUbhiAv4SB/4DKRYg96CSFS2CcIYMbUvBtZlzA1NCbk2AdgbmYwMqwNblLpR441lLeiQ==}
+
   mdurl@2.1.0:
     resolution: {integrity: sha512-1+HBaOx0zi/dQWht8rNv9MYf9qqpqL/kxI0hXImU6Y547zM6Sni8BQibt7ifgMcYtQg41ao3Ivd6cnSM86inpg==}
 
@@ -2945,6 +2959,17 @@ snapshots:
   '@eslint/core@1.2.1':
     dependencies:
       '@types/json-schema': 7.0.15
+
+  '@eslint/css-tree@4.1.2':
+    dependencies:
+      mdn-data: 2.37.2
+      source-map-js: 1.2.2
+
+  '@eslint/css@2.0.1':
+    dependencies:
+      '@eslint/core': 1.2.1
+      '@eslint/css-tree': 4.1.2
+      '@eslint/plugin-kit': 0.7.3
 
   '@eslint/js@10.0.1(eslint@10.14.0(jiti@2.6.1)(supports-color@7.2.0))':
     optionalDependencies:
@@ -4246,6 +4271,8 @@ snapshots:
   mdast-util-to-string@4.0.0:
     dependencies:
       '@types/mdast': 4.0.4
+
+  mdn-data@2.37.2: {}
 
   mdurl@2.1.0: {}
 

@@ -45,6 +45,8 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   ├── angular.spec.ts          # Co-located Unit Spec
 │   │   ├── base.ts                  # Strict Base JS/TS + JSDoc ESLint Config
 │   │   ├── base.spec.ts             # Co-located Unit Spec
+│   │   ├── css.ts                   # CSS ESLint Flat Config Building Block
+│   │   ├── css.spec.ts              # Co-located Unit Spec
 │   │   ├── index.ts                 # Central ESLint Exports & Stack Presets
 │   │   ├── index.spec.ts            # Co-located Unit Spec
 │   │   ├── json.ts                  # JSON & JSONC ESLint Flat Config Building Block

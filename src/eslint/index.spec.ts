@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { angularConfig } from './angular.js';
 import { baseConfig } from './base.js';
+import { cssConfig } from './css.js';
 import defaultIndex, { eslintPresets, presets } from './index.js';
 import { jsonConfig } from './json.js';
 import { markdownEslintConfig } from './markdown.js';
@@ -39,6 +40,7 @@ describe('ESLint Presets Barrel (index.ts)', () => {
         packageJsonConfig.length +
         yamlConfig.length +
         markdownEslintConfig.length +
+        cssConfig.length +
         angularConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,
