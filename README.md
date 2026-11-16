@@ -202,7 +202,8 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   _(Note: `eslintPresets.library`, `eslintPresets.nestjs`, and `eslintPresets.angular` already include `jsonConfig` for
   `*.json`/`*.jsonc` linting via `@eslint/json`, `packageJsonConfig` for `package.json` validation via
   `eslint-plugin-package-json`, `yamlConfig` for `*.yml`/`*.yaml` linting via `eslint-plugin-yml`, and
-  `markdownEslintConfig` for fenced code-block linting in `*.md` via `@eslint/markdown`.)_
+  `markdownEslintConfig` for fenced code-block linting in `*.md` via `@eslint/markdown`. `eslintPresets.angular`
+  additionally includes `cssConfig` for `*.css` linting via `@eslint/css`.)_
 
 ### Markdownlint Preset
 
