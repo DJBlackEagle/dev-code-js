@@ -107,7 +107,7 @@ jobs:
       - name: Run Production Build 🏗️
         if: needs.cqat_detect_changes.outputs.code_changed == 'true'
         run: pnpm run build
-      - name: Verify package exports with publint 📦
+      - name: Verify package exports & types 📦
         if: needs.cqat_detect_changes.outputs.code_changed == 'true'
         run: pnpm run verify:package
 

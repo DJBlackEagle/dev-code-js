@@ -105,7 +105,8 @@
     "test:unit": "vitest run src --coverage.enabled --coverage.reporter=text",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "verify:package": "publint --strict"
+    "verify:package": "publint --strict && pnpm run verify:types",
+    "verify:types": "rm -rf .tmp && mkdir -p .tmp && pnpm pack --pack-destination .tmp && attw .tmp/*.tgz --profile esm-only --exclude-entrypoints ./markdownlint ./markdownlint/index.jsonc && rm -rf .tmp"
   },
   "dependencies": {
     "@commitlint/cli": "^21.2.4",
@@ -132,6 +133,7 @@
     "vitest": "^5.1.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
     "@types/node": "^26.6.6",
     "@vitest/ui": "^5.1.0",
     "eslint": "^10.14.0",
