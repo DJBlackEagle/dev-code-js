@@ -207,14 +207,16 @@ for the scope of modified files:
    - If the user initiates a discussion or requests changes to the plan, present the updated plan and wait for
      approval again before modifying any files.
 2. **Issues First (with Optional GitHub MCP Creation):**
-   - Always create a GitHub issue in English following the templates in `.github/ISSUE_TEMPLATE/` and matching labels
-     from `.github/labels.yml` before starting implementation.
+   - Always create a GitHub issue in English following the exact sections/headings of the matching template in
+     `.github/ISSUE_TEMPLATE/` and matching labels from `.github/labels.yml` before starting implementation.
    - When the `github` MCP server is available, the agent may create issues (`issue_write`) upon user approval,
      including when pre-planning multiple issues ahead of implementation. Otherwise, provide the issue details for
      manual creation.
 3. **Pre-Implementation Branch Verification & Creation:**
    - Do **not** create a branch when merely planning or filing issues ahead of time; create the issue branch only when
      starting implementation of a specific, approved issue.
+   - When starting implementation of an issue and the `github` MCP server is available, update the issue via
+     `issue_write` to add the `in-progress` label (and remove `needs-triage` if present).
    - Before starting implementation, check whether the workspace is on the matching issue branch (`git status -sb` /
      `git fetch`).
    - If not on the right branch: if it already exists locally or on `origin`, check it out (`git checkout <branch>`).
