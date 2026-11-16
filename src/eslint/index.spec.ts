@@ -3,6 +3,7 @@ import { angularConfig } from './angular.js';
 import { baseConfig } from './base.js';
 import defaultIndex, { eslintPresets, presets } from './index.js';
 import { jsonConfig } from './json.js';
+import { markdownEslintConfig } from './markdown.js';
 import { nestjsConfig } from './nestjs.js';
 import { prettierEslintConfig } from './prettier.js';
 import { vitestConfig } from './vitest.js';
@@ -16,6 +17,7 @@ describe('ESLint Presets Barrel (index.ts)', () => {
       baseConfig.length +
         jsonConfig.length +
         yamlConfig.length +
+        markdownEslintConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,
     );
@@ -23,6 +25,7 @@ describe('ESLint Presets Barrel (index.ts)', () => {
       baseConfig.length +
         jsonConfig.length +
         yamlConfig.length +
+        markdownEslintConfig.length +
         nestjsConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,
@@ -31,6 +34,7 @@ describe('ESLint Presets Barrel (index.ts)', () => {
       baseConfig.length +
         jsonConfig.length +
         yamlConfig.length +
+        markdownEslintConfig.length +
         angularConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,

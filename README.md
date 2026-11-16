@@ -176,6 +176,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   import {
     createBaseConfig,
     jsonConfig,
+    markdownEslintConfig,
     nestjsConfig,
     prettierEslintConfig,
     vitestConfig,
@@ -189,6 +190,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
     }),
     ...jsonConfig,
     ...yamlConfig,
+    ...markdownEslintConfig,
     ...nestjsConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -196,7 +198,8 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   ```
 
   _(Note: `eslintPresets.library`, `eslintPresets.nestjs`, and `eslintPresets.angular` already include `jsonConfig` for
-  `*.json`/`*.jsonc` linting via `@eslint/json` and `yamlConfig` for `*.yml`/`*.yaml` linting via `eslint-plugin-yml`.)_
+  `*.json`/`*.jsonc` linting via `@eslint/json`, `yamlConfig` for `*.yml`/`*.yaml` linting via `eslint-plugin-yml`, and
+  `markdownEslintConfig` for fenced code-block linting in `*.md` via `@eslint/markdown`.)_
 
 ### Markdownlint Preset
 
@@ -332,40 +335,40 @@ projects across all three supported stacks.
 
 3. **Create `tsconfig.json`, `tsconfig.build.json`, and `tsconfig.eslint.json`:**
 
-   ```json
+   ```jsonc
    // tsconfig.json
    {
      "$schema": "https://json.schemastore.org/tsconfig",
      "extends": "@djblackeagle/dev-config-js/tsconfig/library.json",
      "compilerOptions": {
        "outDir": "./dist",
-       "rootDir": "."
+       "rootDir": ".",
      },
-     "include": ["src/**/*", "tests/**/*", "eslint.config.js", "vitest.config.ts"]
+     "include": ["src/**/*", "tests/**/*", "eslint.config.js", "vitest.config.ts"],
    }
    ```
 
-   ```json
+   ```jsonc
    // tsconfig.build.json
    {
      "$schema": "https://json.schemastore.org/tsconfig",
      "extends": "./tsconfig.json",
      "compilerOptions": {
-       "rootDir": "./src"
+       "rootDir": "./src",
      },
      "include": ["src/**/*"],
-     "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts", "**/*.test.ts"]
+     "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts", "**/*.test.ts"],
    }
    ```
 
-   ```json
+   ```jsonc
    // tsconfig.eslint.json
    {
      "$schema": "https://json.schemastore.org/tsconfig",
      "extends": "./tsconfig.json",
      "compilerOptions": {
        "noEmit": true,
-       "allowJs": true
+       "allowJs": true,
      },
      "include": [
        "src/**/*",
@@ -373,8 +376,8 @@ projects across all three supported stacks.
        ".lintstagedrc.js",
        "commitlint.config.js",
        "eslint.config.js",
-       "vitest.config.ts"
-     ]
+       "vitest.config.ts",
+     ],
    }
    ```
 

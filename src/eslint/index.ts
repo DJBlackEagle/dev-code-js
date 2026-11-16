@@ -15,6 +15,14 @@ import {
   jsonConfig,
   type JsonConfigOptions,
 } from './json.js';
+import {
+  DEFAULT_MARKDOWN_CODE_BLOCK_FILES,
+  DEFAULT_MARKDOWN_FILES,
+  DEFAULT_MARKDOWN_IGNORES,
+  createMarkdownEslintConfig,
+  markdownEslintConfig,
+  type MarkdownEslintConfigOptions,
+} from './markdown.js';
 import { nestjsConfig } from './nestjs.js';
 import { prettierEslintConfig } from './prettier.js';
 import { TEST_FILE_PATTERNS, vitestConfig } from './vitest.js';
@@ -33,11 +41,19 @@ interface EslintPresets {
 }
 
 const eslintPresets: EslintPresets = {
-  library: [...baseConfig, ...jsonConfig, ...yamlConfig, ...vitestConfig, ...prettierEslintConfig],
+  library: [
+    ...baseConfig,
+    ...jsonConfig,
+    ...yamlConfig,
+    ...markdownEslintConfig,
+    ...vitestConfig,
+    ...prettierEslintConfig,
+  ],
   nestjs: [
     ...baseConfig,
     ...jsonConfig,
     ...yamlConfig,
+    ...markdownEslintConfig,
     ...nestjsConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -46,6 +62,7 @@ const eslintPresets: EslintPresets = {
     ...baseConfig,
     ...jsonConfig,
     ...yamlConfig,
+    ...markdownEslintConfig,
     ...angularConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -59,6 +76,9 @@ export {
   DEFAULT_JSONC_FILES,
   DEFAULT_JSON_FILES,
   DEFAULT_JSON_IGNORES,
+  DEFAULT_MARKDOWN_CODE_BLOCK_FILES,
+  DEFAULT_MARKDOWN_FILES,
+  DEFAULT_MARKDOWN_IGNORES,
   DEFAULT_YAML_FILES,
   DEFAULT_YAML_IGNORES,
   JS_TS_FILES,
@@ -68,9 +88,11 @@ export {
   createAngularConfig,
   createBaseConfig,
   createJsonConfig,
+  createMarkdownEslintConfig,
   createYamlConfig,
   eslintPresets,
   jsonConfig,
+  markdownEslintConfig,
   nestjsConfig,
   presets,
   prettierEslintConfig,
@@ -80,6 +102,7 @@ export {
   type BaseConfigOptions,
   type EslintPresets,
   type JsonConfigOptions,
+  type MarkdownEslintConfigOptions,
   type YamlConfigOptions,
 };
 export default eslintPresets;

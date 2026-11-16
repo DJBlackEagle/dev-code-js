@@ -29,6 +29,10 @@ function createJsonConfig(options: JsonConfigOptions = {}): ConfigArray {
     ignores = [...DEFAULT_JSON_IGNORES],
   } = options;
 
+  const jsoncLanguageOptions: Record<string, unknown> = {
+    allowTrailingCommas: true,
+  };
+
   return [
     {
       name: '@djblackeagle/dev-config-js/json',
@@ -50,6 +54,7 @@ function createJsonConfig(options: JsonConfigOptions = {}): ConfigArray {
         json,
       },
       language: 'json/jsonc',
+      languageOptions: jsoncLanguageOptions,
       rules: {
         ...json.configs.recommended.rules,
       },

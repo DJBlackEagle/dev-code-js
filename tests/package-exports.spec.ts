@@ -11,12 +11,14 @@ import {
   createCommitlintConfig,
   createJsonConfig,
   createLintStagedConfig,
+  createMarkdownEslintConfig,
   createNestjsVitestConfig,
   createVitestConfig,
   createYamlConfig,
   eslintPresets,
   jsonConfig,
   lintStagedConfig,
+  markdownEslintConfig,
   nestjsConfig,
   prettierConfig,
   prettierEslintConfig,
@@ -82,6 +84,8 @@ describe('End-to-End Package Verification & Stack Presets', () => {
     expect(createJsonConfig().length).toBe(2);
     expect(Array.isArray(yamlConfig)).toBe(true);
     expect(createYamlConfig().length).toBeGreaterThan(0);
+    expect(Array.isArray(markdownEslintConfig)).toBe(true);
+    expect(createMarkdownEslintConfig().length).toBe(2);
     expect(vitestPresets.base).toBe(vitestBaseConfig);
     expect(createVitestConfig().test?.environment).toBe('node');
     expect(prettierConfig.singleQuote).toBe(true);
