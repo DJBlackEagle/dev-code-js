@@ -179,6 +179,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
     nestjsConfig,
     prettierEslintConfig,
     vitestConfig,
+    yamlConfig,
   } from '@djblackeagle/dev-config-js/eslint';
 
   export default [
@@ -187,6 +188,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
       tsconfigRootDir: import.meta.dirname,
     }),
     ...jsonConfig,
+    ...yamlConfig,
     ...nestjsConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -194,7 +196,7 @@ Use one of the pre-assembled stack presets (`presets.library`, `presets.nestjs`,
   ```
 
   _(Note: `eslintPresets.library`, `eslintPresets.nestjs`, and `eslintPresets.angular` already include `jsonConfig` for
-  `*.json` and `*.jsonc` linting via `@eslint/json`.)_
+  `*.json`/`*.jsonc` linting via `@eslint/json` and `yamlConfig` for `*.yml`/`*.yaml` linting via `eslint-plugin-yml`.)_
 
 ### Markdownlint Preset
 

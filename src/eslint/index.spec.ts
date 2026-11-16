@@ -6,17 +6,23 @@ import { jsonConfig } from './json.js';
 import { nestjsConfig } from './nestjs.js';
 import { prettierEslintConfig } from './prettier.js';
 import { vitestConfig } from './vitest.js';
+import { yamlConfig } from './yaml.js';
 
 describe('ESLint Presets Barrel (index.ts)', () => {
   it('should export presets for library, nestjs, and angular', () => {
     expect(defaultIndex).toBe(eslintPresets);
     expect(presets).toBe(eslintPresets);
     expect(eslintPresets.library.length).toBe(
-      baseConfig.length + jsonConfig.length + vitestConfig.length + prettierEslintConfig.length,
+      baseConfig.length +
+        jsonConfig.length +
+        yamlConfig.length +
+        vitestConfig.length +
+        prettierEslintConfig.length,
     );
     expect(eslintPresets.nestjs.length).toBe(
       baseConfig.length +
         jsonConfig.length +
+        yamlConfig.length +
         nestjsConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,
@@ -24,6 +30,7 @@ describe('ESLint Presets Barrel (index.ts)', () => {
     expect(eslintPresets.angular.length).toBe(
       baseConfig.length +
         jsonConfig.length +
+        yamlConfig.length +
         angularConfig.length +
         vitestConfig.length +
         prettierEslintConfig.length,

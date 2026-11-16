@@ -18,6 +18,13 @@ import {
 import { nestjsConfig } from './nestjs.js';
 import { prettierEslintConfig } from './prettier.js';
 import { TEST_FILE_PATTERNS, vitestConfig } from './vitest.js';
+import {
+  DEFAULT_YAML_FILES,
+  DEFAULT_YAML_IGNORES,
+  createYamlConfig,
+  yamlConfig,
+  type YamlConfigOptions,
+} from './yaml.js';
 
 interface EslintPresets {
   library: ConfigArray;
@@ -26,11 +33,19 @@ interface EslintPresets {
 }
 
 const eslintPresets: EslintPresets = {
-  library: [...baseConfig, ...jsonConfig, ...vitestConfig, ...prettierEslintConfig],
-  nestjs: [...baseConfig, ...jsonConfig, ...nestjsConfig, ...vitestConfig, ...prettierEslintConfig],
+  library: [...baseConfig, ...jsonConfig, ...yamlConfig, ...vitestConfig, ...prettierEslintConfig],
+  nestjs: [
+    ...baseConfig,
+    ...jsonConfig,
+    ...yamlConfig,
+    ...nestjsConfig,
+    ...vitestConfig,
+    ...prettierEslintConfig,
+  ],
   angular: [
     ...baseConfig,
     ...jsonConfig,
+    ...yamlConfig,
     ...angularConfig,
     ...vitestConfig,
     ...prettierEslintConfig,
@@ -44,6 +59,8 @@ export {
   DEFAULT_JSONC_FILES,
   DEFAULT_JSON_FILES,
   DEFAULT_JSON_IGNORES,
+  DEFAULT_YAML_FILES,
+  DEFAULT_YAML_IGNORES,
   JS_TS_FILES,
   TEST_FILE_PATTERNS,
   angularConfig,
@@ -51,15 +68,18 @@ export {
   createAngularConfig,
   createBaseConfig,
   createJsonConfig,
+  createYamlConfig,
   eslintPresets,
   jsonConfig,
   nestjsConfig,
   presets,
   prettierEslintConfig,
   vitestConfig,
+  yamlConfig,
   type AngularConfigOptions,
   type BaseConfigOptions,
   type EslintPresets,
   type JsonConfigOptions,
+  type YamlConfigOptions,
 };
 export default eslintPresets;
