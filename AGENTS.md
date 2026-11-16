@@ -47,6 +47,8 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 │   │   ├── base.spec.ts             # Co-located Unit Spec
 │   │   ├── index.ts                 # Central ESLint Exports & Stack Presets
 │   │   ├── index.spec.ts            # Co-located Unit Spec
+│   │   ├── json.ts                  # JSON & JSONC ESLint Flat Config Building Block
+│   │   ├── json.spec.ts             # Co-located Unit Spec
 │   │   ├── nestjs.ts                # NestJS ESLint Flat Config Building Block
 │   │   ├── nestjs.spec.ts           # Co-located Unit Spec
 │   │   ├── prettier.ts              # Prettier Rule Conflict Disabler

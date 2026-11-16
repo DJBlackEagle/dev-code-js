@@ -11,12 +11,21 @@ interface BaseConfigOptions {
 }
 
 interface ParserOptions {
+  [key: string]: unknown;
   project?: string | string[] | boolean;
   projectService?: boolean;
   tsconfigRootDir?: string;
 }
 
 const DEFAULT_IGNORES = ['dist/**', 'node_modules/**', 'coverage/**', '*.d.ts', '.tmp/**'] as const;
+const JS_TS_FILES = ['**/*.{js,mjs,cjs,ts,mts,cts}'] as const;
+
+function scopeToJsTs(configs: ConfigArray): ConfigArray {
+  return configs.map((entry) => ({
+    ...entry,
+    files: entry.files ?? [...JS_TS_FILES],
+  }));
+}
 
 function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
   const {
@@ -41,12 +50,15 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
       name: '@djblackeagle/dev-config-js/ignores',
       ignores,
     },
-    eslint.configs.recommended,
-    ...tseslint.configs.strictTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
-    jsdoc.configs['flat/recommended-typescript'],
+    ...scopeToJsTs([
+      eslint.configs.recommended,
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+      jsdoc.configs['flat/recommended-typescript'],
+    ]),
     {
       name: '@djblackeagle/dev-config-js/base',
+      files: [...JS_TS_FILES],
       languageOptions: {
         globals: {
           ...globals.node,
@@ -85,5 +97,5 @@ function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
 
 const baseConfig: ConfigArray = createBaseConfig();
 
-export { DEFAULT_IGNORES, baseConfig, createBaseConfig, type BaseConfigOptions };
+export { DEFAULT_IGNORES, JS_TS_FILES, baseConfig, createBaseConfig, type BaseConfigOptions };
 export default baseConfig;
