@@ -133,7 +133,29 @@ jobs:
       - name: Install dependencies 🔧
         run: pnpm install --frozen-lockfile
       - name: Run Vitest 🧪
-        run: pnpm run test
+        run: pnpm run test -- --coverage.reporter=text --coverage.reporter=json-summary
+      - name: Publish coverage summary 📊
+        if: always() && hashFiles('coverage/coverage-summary.json') != ''
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const summary = JSON.parse(fs.readFileSync("coverage/coverage-summary.json", "utf8")).total;
+            const rows = [
+              ["Statements", summary.statements],
+              ["Branches", summary.branches],
+              ["Functions", summary.functions],
+              ["Lines", summary.lines],
+            ].map(([name, m]) => `| ${name} | ${m.covered}/${m.total} | ${m.pct}% |`).join("\n");
+            const md = [
+              "### Vitest Coverage (Node ${{ matrix.node-version }})",
+              "",
+              "| Metric | Covered | Percentage |",
+              "| :--- | ---: | ---: |",
+              rows,
+              "",
+            ].join("\n");
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md);
+          '
 
   cqat_status_gate:
     name: All status checks passed
