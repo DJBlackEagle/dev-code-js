@@ -104,7 +104,8 @@
     "test:coverage": "vitest run --coverage",
     "test:unit": "vitest run src --coverage.enabled --coverage.reporter=text",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:package": "publint --strict"
   },
   "dependencies": {
     "@commitlint/cli": "^21.2.4",
@@ -135,6 +136,7 @@
     "@vitest/ui": "^5.1.0",
     "eslint": "^10.14.0",
     "husky": "^9.1.7",
+    "publint": "^0.3.25",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   }
