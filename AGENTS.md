@@ -37,6 +37,11 @@ assistants (Gemini, Antigravity, etc.) writing, refactoring, or testing code in 
 
 ```text
 ├── src/
+│   ├── cli/
+│   │   ├── bin.ts                   # CLI Binary Entrypoint
+│   │   ├── bin.spec.ts              # Co-located Unit Spec
+│   │   ├── init.ts                  # Init CLI Scaffolding Logic
+│   │   └── init.spec.ts             # Co-located Unit Spec
 │   ├── commitlint/
 │   │   ├── index.ts                 # Shared Commitlint Conventional Commits Preset
 │   │   └── index.spec.ts            # Co-located Unit Spec
