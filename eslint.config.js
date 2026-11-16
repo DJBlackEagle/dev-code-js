@@ -3,7 +3,9 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 import vitest from '@vitest/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import importX from 'eslint-plugin-import-x';
 import jsdoc from 'eslint-plugin-jsdoc';
+import nodePlugin from 'eslint-plugin-n';
 import packageJson from 'eslint-plugin-package-json';
 import yml from 'eslint-plugin-yml';
 import globals from 'globals';
@@ -30,6 +32,10 @@ export default tseslint.config(
   ].map((entry) => ({ ...entry, files: entry.files ?? JS_TS_FILES })),
   {
     files: JS_TS_FILES,
+    plugins: {
+      'import-x': importX,
+      n: nodePlugin,
+    },
     languageOptions: {
       globals: {
         ...globals.node,
@@ -55,6 +61,14 @@ export default tseslint.config(
         },
       ],
       'no-console': 'error',
+      'import-x/first': 'error',
+      'import-x/newline-after-import': 'error',
+      'import-x/no-duplicates': 'error',
+      'import-x/no-mutable-exports': 'error',
+      'import-x/no-self-import': 'error',
+      'n/no-deprecated-api': 'error',
+      'n/no-process-exit': 'error',
+      'n/prefer-node-protocol': 'error',
       'jsdoc/require-jsdoc': 'off',
       'jsdoc/require-param': 'off',
       'jsdoc/require-returns': 'off',

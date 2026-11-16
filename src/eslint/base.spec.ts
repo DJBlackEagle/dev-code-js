@@ -18,6 +18,9 @@ describe('ESLint Base Configuration (base.ts)', () => {
     );
     expect(rulesBlock?.rules).toMatchObject({
       '@typescript-eslint/no-explicit-any': 'error',
+      'import-x/first': 'error',
+      'import-x/no-duplicates': 'error',
+      'n/prefer-node-protocol': 'error',
       'no-console': 'error',
       'jsdoc/require-jsdoc': 'off',
     });
