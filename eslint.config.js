@@ -4,6 +4,7 @@ import markdown from '@eslint/markdown';
 import vitest from '@vitest/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
+import packageJson from 'eslint-plugin-package-json';
 import yml from 'eslint-plugin-yml';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -78,13 +79,14 @@ export default tseslint.config(
   },
   {
     files: ['**/*.json'],
-    ignores: ['**/package-lock.json', '**/pnpm-lock.yaml', ...JSONC_FILES],
+    ignores: ['**/package.json', '**/package-lock.json', '**/pnpm-lock.yaml', ...JSONC_FILES],
     plugins: { json },
     language: 'json/json',
     rules: {
       ...json.configs.recommended.rules,
     },
   },
+  packageJson.configs.recommended,
   {
     files: JSONC_FILES,
     ignores: ['**/package-lock.json', '**/pnpm-lock.yaml'],

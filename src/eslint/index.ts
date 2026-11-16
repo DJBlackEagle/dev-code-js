@@ -24,6 +24,12 @@ import {
   type MarkdownEslintConfigOptions,
 } from './markdown.js';
 import { nestjsConfig } from './nestjs.js';
+import {
+  DEFAULT_PACKAGE_JSON_FILES,
+  createPackageJsonConfig,
+  packageJsonConfig,
+  type PackageJsonConfigOptions,
+} from './package-json.js';
 import { prettierEslintConfig } from './prettier.js';
 import { TEST_FILE_PATTERNS, vitestConfig } from './vitest.js';
 import {
@@ -44,6 +50,7 @@ const eslintPresets: EslintPresets = {
   library: [
     ...baseConfig,
     ...jsonConfig,
+    ...packageJsonConfig,
     ...yamlConfig,
     ...markdownEslintConfig,
     ...vitestConfig,
@@ -52,6 +59,7 @@ const eslintPresets: EslintPresets = {
   nestjs: [
     ...baseConfig,
     ...jsonConfig,
+    ...packageJsonConfig,
     ...yamlConfig,
     ...markdownEslintConfig,
     ...nestjsConfig,
@@ -61,6 +69,7 @@ const eslintPresets: EslintPresets = {
   angular: [
     ...baseConfig,
     ...jsonConfig,
+    ...packageJsonConfig,
     ...yamlConfig,
     ...markdownEslintConfig,
     ...angularConfig,
@@ -79,6 +88,7 @@ export {
   DEFAULT_MARKDOWN_CODE_BLOCK_FILES,
   DEFAULT_MARKDOWN_FILES,
   DEFAULT_MARKDOWN_IGNORES,
+  DEFAULT_PACKAGE_JSON_FILES,
   DEFAULT_YAML_FILES,
   DEFAULT_YAML_IGNORES,
   JS_TS_FILES,
@@ -89,11 +99,13 @@ export {
   createBaseConfig,
   createJsonConfig,
   createMarkdownEslintConfig,
+  createPackageJsonConfig,
   createYamlConfig,
   eslintPresets,
   jsonConfig,
   markdownEslintConfig,
   nestjsConfig,
+  packageJsonConfig,
   presets,
   prettierEslintConfig,
   vitestConfig,
@@ -103,6 +115,7 @@ export {
   type EslintPresets,
   type JsonConfigOptions,
   type MarkdownEslintConfigOptions,
+  type PackageJsonConfigOptions,
   type YamlConfigOptions,
 };
 export default eslintPresets;
