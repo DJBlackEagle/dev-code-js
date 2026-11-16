@@ -231,6 +231,10 @@ for the scope of modified files:
 5. **Commit Messages & Signed Local Commits:**
    - Write commit messages in English following Conventional Commits as enforced by `commitlint.config.js`, and include
      `Closes #<number>` in the footer when resolving an issue.
+   - Choose commit types according to `release-please-config.json` visibility: use `docs:` for user-facing package
+     documentation (`README.md`, API/JSDoc), `chore:` for internal repository/AI/community files (`AGENTS.md`,
+     `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, `.github/*`) so they stay hidden from `CHANGELOG.md`, and
+     `refactor:` only for source-code refactoring in `src/`.
    - Always create commits locally via `git` so commits remain signed—never commit or push code changes through GitHub
      MCP file-write APIs (`create_or_update_file`, `push_files`).
 6. **Pull Requests:**
