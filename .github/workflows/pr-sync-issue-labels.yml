@@ -1,6 +1,9 @@
 name: 'Sync Issue Labels to PR'
 
 on:
+  issues:
+    types:
+      - closed
   pull_request_target:
     types:
       - opened
@@ -14,22 +17,55 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.event.issue.number }}
   cancel-in-progress: true
 
 jobs:
   sync-labels:
-    name: Sync labels from linked issues
+    name: Sync issue and PR labels
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Sync labels from linked issues
+      - name: Sync issue and PR labels
         uses: actions/github-script@v9
         with:
           script: |
+            const { owner, repo } = context.repo;
+            const statusLabelsToRemove = ['in-progress', 'in-review'];
+
+            const removeStatusLabels = async (issueNumber, existingLabelNames) => {
+              for (const labelName of statusLabelsToRemove) {
+                if (!existingLabelNames.has(labelName)) {
+                  continue;
+                }
+
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner,
+                    repo,
+                    issue_number: issueNumber,
+                    name: labelName,
+                  });
+                  core.info(`Removed "${labelName}" label from issue #${issueNumber}.`);
+                } catch (error) {
+                  if (error.status !== 404) {
+                    throw error;
+                  }
+                }
+              }
+            };
+
+            if (context.eventName === 'issues') {
+              const issue = context.payload.issue;
+              const existingLabelNames = new Set(issue.labels.map((label) => label.name));
+              await removeStatusLabels(issue.number, existingLabelNames);
+              return;
+            }
+
             const ignoredLabels = new Set([
               'needs-triage',
               'in-progress',
+              'in-review',
               'blocked',
               'stale',
               'no-stale',
@@ -39,7 +75,6 @@ jobs:
               'wontfix',
             ]);
 
-            const { owner, repo } = context.repo;
             const prNumber = context.payload.pull_request.number;
 
             const result = await github.graphql(
@@ -50,6 +85,7 @@ jobs:
                       closingIssuesReferences(first: 20) {
                         nodes {
                           number
+                          state
                           labels(first: 50) {
                             nodes {
                               name
@@ -71,30 +107,9 @@ jobs:
             }
 
             if (context.payload.action === 'closed') {
-              if (!context.payload.pull_request.merged) {
-                core.info('PR closed without merge; leaving issue labels unchanged.');
-                return;
-              }
-
               for (const issue of linkedIssues) {
-                const hasInProgress = issue.labels.nodes.some((label) => label.name === 'in-progress');
-                if (!hasInProgress) {
-                  continue;
-                }
-
-                try {
-                  await github.rest.issues.removeLabel({
-                    owner,
-                    repo,
-                    issue_number: issue.number,
-                    name: 'in-progress',
-                  });
-                  core.info(`Removed "in-progress" label from issue #${issue.number}.`);
-                } catch (error) {
-                  if (error.status !== 404) {
-                    throw error;
-                  }
-                }
+                const existingLabelNames = new Set(issue.labels.nodes.map((label) => label.name));
+                await removeStatusLabels(issue.number, existingLabelNames);
               }
               return;
             }
@@ -107,16 +122,33 @@ jobs:
               ),
             ];
 
-            if (labelsToAdd.length === 0) {
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: prNumber,
+                labels: labelsToAdd,
+              });
+              core.info(`Synced labels to PR #${prNumber}: ${labelsToAdd.join(', ')}`);
+            } else {
               core.info('No eligible labels to sync from linked issues.');
-              return;
             }
 
-            await github.rest.issues.addLabels({
-              owner,
-              repo,
-              issue_number: prNumber,
-              labels: labelsToAdd,
-            });
+            for (const issue of linkedIssues) {
+              if (issue.state !== 'OPEN') {
+                continue;
+              }
 
-            core.info(`Synced labels to PR #${prNumber}: ${labelsToAdd.join(', ')}`);
+              const existingLabelNames = new Set(issue.labels.nodes.map((label) => label.name));
+              if (existingLabelNames.has('in-review')) {
+                continue;
+              }
+
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: issue.number,
+                labels: ['in-review'],
+              });
+              core.info(`Added "in-review" label to issue #${issue.number}.`);
+            }
