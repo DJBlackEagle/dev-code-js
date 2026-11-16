@@ -6,8 +6,10 @@ interface MarkdownlintConfig {
   config?: {
     default?: boolean;
     MD013?: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
       line_length?: number;
       tables?: boolean;
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
       code_blocks?: boolean;
     };
   };
@@ -31,8 +33,10 @@ describe('Markdownlint Configuration Preset (index.jsonc)', () => {
       config: {
         default: true,
         MD013: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
           line_length: 120,
           tables: false,
+          // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
           code_blocks: false,
         },
       },

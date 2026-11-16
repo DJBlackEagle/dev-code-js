@@ -23,7 +23,7 @@ const JSONC_FILES = [
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.d.ts', '.tmp/**'],
+    ignores: ['dist/**', 'node_modules/**', 'coverage/**', '*.d.ts', '.tmp/**', '**/generated/**'],
   },
   ...[
     eslint.configs.recommended,
@@ -66,6 +66,81 @@ export default tseslint.config(
         },
       ],
       'no-console': 'error',
+      eqeqeq: ['error', 'always'],
+      curly: 'error',
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'default-case-last': 'error',
+      'no-param-reassign': 'error',
+      'object-shorthand': 'error',
+      'prefer-template': 'error',
+      'no-else-return': 'error',
+      'no-useless-return': 'error',
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'default',
+          format: ['camelCase'],
+          leadingUnderscore: 'allow',
+          trailingUnderscore: 'forbid',
+        },
+        {
+          selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'function',
+          format: ['camelCase', 'PascalCase'],
+        },
+        {
+          selector: 'parameter',
+          format: ['camelCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'interface',
+          format: ['PascalCase'],
+          custom: {
+            regex: '^I[A-Z]',
+            match: false,
+          },
+        },
+        {
+          selector: 'typeAlias',
+          format: ['PascalCase'],
+          custom: {
+            regex: '^T[A-Z]',
+            match: false,
+          },
+        },
+        {
+          selector: 'enumMember',
+          format: ['PascalCase', 'UPPER_CASE'],
+        },
+        {
+          selector: ['objectLiteralProperty', 'typeProperty'],
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: ['objectLiteralProperty', 'typeProperty', 'classProperty', 'default'],
+          modifiers: ['requiresQuotes'],
+          format: null,
+        },
+        {
+          selector: 'default',
+          filter: {
+            regex: '^(_id|__typename)$',
+            match: true,
+          },
+          format: null,
+        },
+      ],
       '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
       '@eslint-community/eslint-comments/require-description': [
         'error',

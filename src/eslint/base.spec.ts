@@ -12,6 +12,7 @@ describe('ESLint Base Configuration (base.ts)', () => {
       (entry) => entry.name === '@djblackeagle/dev-config-js/ignores',
     );
     expect(ignoreBlock?.ignores).toEqual([...DEFAULT_IGNORES]);
+    expect(DEFAULT_IGNORES).toContain('**/generated/**');
 
     const rulesBlock = baseConfig.find(
       (entry) => entry.name === '@djblackeagle/dev-config-js/base',
@@ -30,8 +31,41 @@ describe('ESLint Base Configuration (base.ts)', () => {
       'import-x/no-duplicates': 'error',
       'n/prefer-node-protocol': 'error',
       'no-console': 'error',
+      eqeqeq: ['error', 'always'],
+      curly: 'error',
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'default-case-last': 'error',
+      'no-param-reassign': 'error',
+      'object-shorthand': 'error',
+      'prefer-template': 'error',
+      'no-else-return': 'error',
+      'no-useless-return': 'error',
       'jsdoc/require-jsdoc': 'off',
     });
+    const namingConvention = rulesBlock?.rules?.['@typescript-eslint/naming-convention'];
+    expect(Array.isArray(namingConvention)).toBe(true);
+    expect(namingConvention).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          selector: 'interface',
+          custom: { regex: '^I[A-Z]', match: false },
+        }),
+        expect.objectContaining({
+          selector: 'typeAlias',
+          custom: { regex: '^T[A-Z]', match: false },
+        }),
+        expect.objectContaining({
+          modifiers: ['requiresQuotes'],
+          format: null,
+        }),
+        expect.objectContaining({
+          selector: 'default',
+          filter: { regex: '^(_id|__typename)$', match: true },
+          format: null,
+        }),
+      ]),
+    );
     expect(rulesBlock?.languageOptions?.parserOptions).toEqual({
       projectService: true,
     });
