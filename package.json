@@ -1,6 +1,6 @@
 {
   "name": "@djblackeagle/dev-config-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Centralized, modular TypeScript, ESLint, Prettier, Markdownlint, Vitest, and Git tooling presets for Node.js, NestJS, and Angular.",
   "license": "MIT",
   "author": "DJ BlackEagle",
