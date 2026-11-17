@@ -1,9 +1,19 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
 const repoRoot = path.resolve(import.meta.dirname, '..');
+
+const EXPECTED_CLI_FILES = [
+  'tsconfig.json',
+  'eslint.config.js',
+  'prettier.config.mjs',
+  'commitlint.config.js',
+  '.lintstagedrc.js',
+  '.markdownlint-cli2.jsonc',
+  'vitest.config.ts',
+];
 
 function run(command, args, cwd) {
   process.stdout.write(`> ${command} ${args.join(' ')}\n`);
@@ -30,43 +40,16 @@ function createConsumerProject(consumerDir, tarballPath) {
   });
 
   run('pnpm', ['add', tarballPath], consumerDir);
-  run('pnpm', ['add', '-D', 'vitest', '--prefer-offline'], consumerDir);
+  run('pnpm', ['add', '-D', 'vitest', '@types/node', '--prefer-offline'], consumerDir);
+  run('pnpm', ['exec', 'dev-config-js', 'init', '--stack', 'library'], consumerDir);
 
-  writeFileSync(
-    path.join(consumerDir, 'tsconfig.json'),
-    [
-      '{',
-      '  "extends": "@djblackeagle/dev-config-js/tsconfig/library.json",',
-      '  "compilerOptions": {',
-      '    "noEmit": true,',
-      '    "types": []',
-      '  },',
-      '  "include": ["src/**/*.ts", "vitest.config.ts"]',
-      '}',
-      '',
-    ].join('\n'),
-    'utf8',
-  );
+  for (const file of EXPECTED_CLI_FILES) {
+    if (!existsSync(path.join(consumerDir, file))) {
+      throw new Error(`Expected CLI-generated file to exist: ${file}`);
+    }
+  }
 
   writeFileSync(path.join(consumerDir, '.prettierignore'), 'pnpm-lock.yaml\n', 'utf8');
-
-  writeFileSync(
-    path.join(consumerDir, 'eslint.config.js'),
-    "import { presets } from '@djblackeagle/dev-config-js/eslint';\n\nexport default [...presets.library];\n",
-    'utf8',
-  );
-
-  writeFileSync(
-    path.join(consumerDir, 'prettier.config.js'),
-    "export { default } from '@djblackeagle/dev-config-js/prettier';\n",
-    'utf8',
-  );
-
-  writeFileSync(
-    path.join(consumerDir, 'vitest.config.ts'),
-    "import { vitestPresets } from '@djblackeagle/dev-config-js/vitest';\n\nexport default vitestPresets.base;\n",
-    'utf8',
-  );
 
   writeFileSync(
     path.join(srcDir, 'index.ts'),

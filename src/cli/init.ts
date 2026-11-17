@@ -47,40 +47,38 @@ const HELP_TEXT = [
   '  -h, --help        Show this help message',
 ].join('\n');
 
-const MARKDOWNLINT_TEMPLATE = `${JSON.stringify(
-  {
-    config: {
-      default: true,
-      MD013: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
-        line_length: 120,
-        tables: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention -- markdownlint JSON schema uses snake_case
-        code_blocks: false,
-      },
-    },
-    globs: ['**/*.md'],
-    ignores: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
-  },
-  null,
-  2,
-)}\n`;
+const MARKDOWNLINT_TEMPLATE = [
+  '{',
+  '  "config": {',
+  '    "default": true,',
+  '    "MD013": {',
+  '      "line_length": 120,',
+  '      "tables": false,',
+  '      "code_blocks": false',
+  '    }',
+  '  },',
+  '  "globs": ["**/*.md"],',
+  '  "ignores": ["**/node_modules/**", "**/dist/**", "**/coverage/**"]',
+  '}',
+  '',
+].join('\n');
 
 function isStackType(value: string): value is StackType {
   return (SUPPORTED_STACKS as readonly string[]).includes(value);
 }
 
 function getTsConfigTemplate(stack: StackType): string {
-  const baseConfig: Record<string, unknown> = {
-    extends: `@djblackeagle/dev-config-js/tsconfig/${stack}.json`,
-    compilerOptions: {
-      outDir: './dist',
-      rootDir: './src',
-    },
-    include: ['src'],
-  };
-
-  return `${JSON.stringify(baseConfig, null, 2)}\n`;
+  return [
+    '{',
+    `  "extends": "@djblackeagle/dev-config-js/tsconfig/${stack}.json",`,
+    '  "compilerOptions": {',
+    '    "outDir": "./dist",',
+    '    "rootDir": "./src"',
+    '  },',
+    '  "include": ["src"]',
+    '}',
+    '',
+  ].join('\n');
 }
 
 function getTemplatesForStack(stack: StackType): Record<string, string> {

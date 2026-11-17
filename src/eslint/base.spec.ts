@@ -67,7 +67,9 @@ describe('ESLint Base Configuration (base.ts)', () => {
       ]),
     );
     expect(rulesBlock?.languageOptions?.parserOptions).toEqual({
-      projectService: true,
+      projectService: {
+        allowDefaultProject: ['vitest.config.ts', 'vitest.config.mts'],
+      },
     });
   });
 
