@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.1](https://github.com/DJBlackEagle/dev-code-js/compare/1.0.0...1.0.1) (2026-11-17)
+
+
+### Bug Fixes
+
+* **eslint,cli:** verify init CLI in smoke test and fix scaffolded config checks ([#127](https://github.com/DJBlackEagle/dev-code-js/issues/127)) ([a707230](https://github.com/DJBlackEagle/dev-code-js/commit/a707230b1cb89a238042303e4253347895517db6)), closes [#123](https://github.com/DJBlackEagle/dev-code-js/issues/123)
+
+
+### Documentation
+
+* **readme:** document @types/node requirement or types override for tsconfig presets ([#118](https://github.com/DJBlackEagle/dev-code-js/issues/118)) ([fc08b91](https://github.com/DJBlackEagle/dev-code-js/commit/fc08b91fc1a796ef923f597b2840a936bf8c30be)), closes [#114](https://github.com/DJBlackEagle/dev-code-js/issues/114)
+* **readme:** update ESLint version label to ESLint 10+ in exports overview ([#126](https://github.com/DJBlackEagle/dev-code-js/issues/126)) ([8e12840](https://github.com/DJBlackEagle/dev-code-js/commit/8e12840b8fa071de9b27e20b6cc8000762e61a25)), closes [#122](https://github.com/DJBlackEagle/dev-code-js/issues/122)
+
 ## 1.0.0 (2026-11-16)
 
 ### Features
