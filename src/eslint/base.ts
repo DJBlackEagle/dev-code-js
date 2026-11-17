@@ -6,9 +6,14 @@ import nodePlugin from 'eslint-plugin-n';
 import globals from 'globals';
 import tseslint, { type ConfigArray } from 'typescript-eslint';
 
+interface ProjectServiceOptions {
+  allowDefaultProject?: string[];
+  defaultProject?: string;
+}
+
 interface BaseConfigOptions {
   project?: string | string[] | boolean;
-  projectService?: boolean;
+  projectService?: boolean | ProjectServiceOptions;
   tsconfigRootDir?: string;
   ignores?: string[];
 }
@@ -16,7 +21,7 @@ interface BaseConfigOptions {
 interface ParserOptions {
   [key: string]: unknown;
   project?: string | string[] | boolean;
-  projectService?: boolean;
+  projectService?: boolean | ProjectServiceOptions;
   tsconfigRootDir?: string;
 }
 
@@ -40,7 +45,7 @@ function scopeToJsTs(configs: ConfigArray): ConfigArray {
 function createBaseConfig(options: BaseConfigOptions = {}): ConfigArray {
   const {
     project,
-    projectService = true,
+    projectService = { allowDefaultProject: ['vitest.config.ts', 'vitest.config.mts'] },
     tsconfigRootDir,
     ignores = [...DEFAULT_IGNORES],
   } = options;
