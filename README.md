@@ -129,6 +129,11 @@ Extend one of the modular TypeScript presets in your project's `tsconfig.json`:
   }
   ```
 
+> [!NOTE]
+> `base.json` (and therefore `library.json` and `nestjs.json`) sets `"types": ["node"]`. Install `@types/node` as a
+> `devDependency` (`pnpm add -D @types/node`), or override `"types": []` in your `tsconfig.json` for pure
+> browser/universal libraries to avoid `TS2688: Cannot find type definition file for 'node'`.
+
 ### Prettier Preset
 
 Reference the shared Prettier preset directly in your `package.json`:
