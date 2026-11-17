@@ -55,7 +55,7 @@ Using `@djblackeagle/dev-config-js` offers several advantages for your projects:
 | `@djblackeagle/dev-config-js/tsconfig/nestjs.json`  | TypeScript        | NestJS backend preset (`experimentalDecorators`, `emitDecoratorMetadata`)        |
 | `@djblackeagle/dev-config-js/tsconfig/angular.json` | TypeScript        | Angular frontend preset (`bundler` resolution, `angularCompilerOptions`)         |
 | `@djblackeagle/dev-config-js/prettier`              | Prettier          | Shared Prettier configuration (`singleQuote`, `printWidth: 100`, JSONC override) |
-| `@djblackeagle/dev-config-js/eslint`                | ESLint 9+         | Stack presets (`presets.library`, `presets.nestjs`, `presets.angular`) & blocks  |
+| `@djblackeagle/dev-config-js/eslint`                | ESLint 10+        | Stack presets (`presets.library`, `presets.nestjs`, `presets.angular`) & blocks  |
 | `@djblackeagle/dev-config-js/markdownlint`          | markdownlint-cli2 | Shared Markdownlint ruleset (`MD013` 120 chars, standard ignores)                |
 | `@djblackeagle/dev-config-js/vitest`                | Vitest            | Base Node.js / library test & V8 coverage preset (`vitestBaseConfig`)            |
 | `@djblackeagle/dev-config-js/vitest/nestjs`         | Vitest            | NestJS test & V8 coverage preset (`vitestNestjsConfig`)                          |
