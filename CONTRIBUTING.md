@@ -169,6 +169,8 @@ Enhancement suggestions are tracked as [issues][REF_INTERN_URL_ISSUE_LIST].
    - `pnpm typecheck` (Run TypeScript type checking)
    - `pnpm test` (Run Vitest test suite with coverage)
    - `pnpm build` (Verify production build)
+   - `pnpm verify:package` (Verify package exports and TypeScript module resolution)
+   - `pnpm test:smoke` (Run packed consumer smoke test)
 7. Open a Pull Request against `main` using `.github/PULL_REQUEST_TEMPLATE.md`. Pull requests are integrated via
    **Squash and merge** once all required status checks pass.
 
@@ -231,10 +233,10 @@ Must be one of the following:
 - **fix**: Resolving a bug.
 - **perf**: Code changes that enhance performance.
 - **refactor**: Code changes that neither fix bugs nor add features.
+- **revert**: Reverts a previous commit.
 - **style**: Changes without altering code functionality (e.g., white-space,
   formatting, missing semicolons).
 - **test**: Adding or correcting tests.
-- **sample**: Changes to sample or template code.
 
 #### Scope <!-- omit in toc -->
 
@@ -243,6 +245,7 @@ be perceived by someone reading the changelog generated from commit messages.
 
 The following is the list of supported scopes:
 
+- **cli**: for changes to the `dev-config-js` scaffolding CLI
 - **tsconfig**: for changes to TypeScript configuration presets
 - **eslint**: for changes to ESLint flat configuration presets
 - **prettier**: for changes to Prettier configuration presets
@@ -251,6 +254,9 @@ The following is the list of supported scopes:
 - **commitlint**: for changes to Commitlint configurations
 - **lint-staged**: for changes to Lint-Staged configurations
 - **devcontainer**: for changes to the repository DevContainer setup
+- **package**: for changes to `package.json` metadata or exports
+- **release**: for changes to Release Please configuration
+- **workflows**: for changes to GitHub Actions workflows
 - **deps**: for dependency updates
 
 If your change affects more than one module, separate the scopes with a
