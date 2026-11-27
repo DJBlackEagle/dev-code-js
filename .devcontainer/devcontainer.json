@@ -10,9 +10,6 @@
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/git-lfs:1": {}
   },
-  "remoteEnv": {
-    "SSH_AUTH_SOCK": "/var/run/ssh-agent.sock"
-  },
   "customizations": {
     "vscode": {
       "settings": {
