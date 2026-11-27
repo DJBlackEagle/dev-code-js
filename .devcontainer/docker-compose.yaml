@@ -7,6 +7,9 @@ services:
       dockerfile: dockerfile
       args:
         USERNAME: 'vscode'
+        GIT_SIGNING_PUB_KEY: '${GIT_SIGNING_PUB_KEY:-}'
+        GIT_USER_NAME: '${GIT_USER_NAME:-}'
+        GIT_USER_EMAIL: '${GIT_USER_EMAIL:-}'
         NVM_VERSION: 'v0.39.7'
         DEFAULT_NODE_VERSION: '24'
         NODE_VERSIONS: '18 20 22 24 26'
@@ -16,13 +19,6 @@ services:
         source: ..
         target: /workspaces/dev-code-js
         consistency: cached
-      - type: bind
-        source: ${SSH_AUTH_SOCK}
-        target: /var/run/ssh-agent.sock
-      - type: bind
-        source: ${HOME}/.ssh
-        target: /home/vscode/.ssh
-        read_only: true
       - type: bind
         source: ${AI_CONFIG_HOST}
         target: ${AI_CONFIG_TARGET}

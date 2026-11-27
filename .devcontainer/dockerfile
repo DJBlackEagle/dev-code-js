@@ -4,6 +4,9 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 ARG NVM_VERSION=v0.39.7
 ARG DEFAULT_NODE_VERSION=24
 ARG NODE_VERSIONS="18 20 22 24 26"
+ARG GIT_SIGNING_PUB_KEY=""
+ARG GIT_USER_NAME=""
+ARG GIT_USER_EMAIL=""
 
 # Define user and home directory variables for the build process
 ARG USERNAME=vscode
@@ -30,11 +33,24 @@ RUN . "${USER_HOME}/.nvm/nvm.sh" \
   && npm install -g pnpm \
   && pnpm setup
 
-# Ensure global git config for SSH signing is permanently set
-RUN git config --global gpg.format ssh \
-  && git config --global user.signingkey "/home/vscode/.ssh/id_ed25519-git-commit.pub" \
-  && git config --global gpg.ssh.allowedSignersFile "/home/vscode/.ssh/allowed_signers" \
-  && git config --global commit.gpgsign true
+# Set Git user identity if provided from host
+RUN if [ -n "$GIT_USER_NAME" ]; then git config --global user.name "$GIT_USER_NAME"; fi \
+  && if [ -n "$GIT_USER_EMAIL" ]; then git config --global user.email "$GIT_USER_EMAIL"; fi
+
+# Configure SSH commit signing and local verification
+RUN if [ -n "$GIT_SIGNING_PUB_KEY" ]; then \
+  mkdir -p "${USER_HOME}/.ssh" && chmod 700 "${USER_HOME}/.ssh" && \
+  printf '%s\n' "$GIT_SIGNING_PUB_KEY" > "${USER_HOME}/.ssh/git_signing.pub" && \
+  chmod 644 "${USER_HOME}/.ssh/git_signing.pub" && \
+  git config --global gpg.format ssh && \
+  git config --global user.signingkey "${USER_HOME}/.ssh/git_signing.pub" && \
+  git config --global commit.gpgsign true && \
+  if [ -n "$GIT_USER_EMAIL" ]; then \
+  printf '%s %s\n' "$GIT_USER_EMAIL" "$GIT_SIGNING_PUB_KEY" > "${USER_HOME}/.ssh/allowed_signers" && \
+  chmod 644 "${USER_HOME}/.ssh/allowed_signers" && \
+  git config --global gpg.ssh.allowedSignersFile "${USER_HOME}/.ssh/allowed_signers"; \
+  fi; \
+  fi
 
 # Add useful shell aliases and ensure they expand properly
 RUN echo 'alias l="ls -lh"' >> ${USER_HOME}/.bashrc \
